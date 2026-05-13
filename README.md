@@ -79,8 +79,8 @@ Admin panel: `/admin`
 
 ```bash
 # Clone
-git clone https://github.com/YOUR_USERNAME/taman-ana.git
-cd taman-ana
+git clone https://github.com/Hamzahxvi/taman-ana-drink-shop-system.git
+cd taman-ana-drink-shop-system
 
 # Install dependencies
 composer install
