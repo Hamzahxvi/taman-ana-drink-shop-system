@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Coffee, Image, LayoutGrid, ShoppingBag } from 'lucide-react';
+import { ClipboardList, Coffee, Image, LayoutGrid, ShoppingBag } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -24,6 +24,11 @@ export function AppSidebar() {
             title: 'Dashboard',
             href: dashboard(),
             icon: LayoutGrid,
+        },
+        {
+            title: 'My Orders',
+            href: '/orders',
+            icon: ClipboardList,
         },
     ];
 
