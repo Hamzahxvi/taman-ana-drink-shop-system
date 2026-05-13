@@ -1,5 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
-import { ClipboardList, Coffee, ShoppingBag, TrendingUp } from 'lucide-react';
+import { Head, Link, router } from '@inertiajs/react';
+import { ClipboardList, Coffee, LogOut, ShoppingBag, TrendingUp } from 'lucide-react';
 
 export default function AdminDashboard({
     stats,
@@ -45,9 +45,22 @@ export default function AdminDashboard({
             <Head title="Admin Dashboard" />
 
             <div className="p-6">
-                <h1 className="mb-8 text-2xl font-bold text-zinc-100">
-                    Admin Dashboard
-                </h1>
+                <div className="mb-8 flex items-center justify-between">
+                    <h1 className="text-2xl font-bold text-zinc-100">
+                        Admin Dashboard
+                    </h1>
+                    <button
+                        onClick={() =>
+                            router.post('/logout', {}, {
+                                onFinish: () => window.location.href = '/',
+                            })
+                        }
+                        className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
+                    >
+                        <LogOut className="h-4 w-4" />
+                        Logout
+                    </button>
+                </div>
 
                 <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {cards.map((card) => {
