@@ -13,12 +13,16 @@ class AdminOrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('items')
+        $allOrders = Order::with('items')
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $inProgressOrders = $allOrders->whereIn('status', ['pending', 'in-progress'])->values();
+        $completedOrders = $allOrders->where('status', 'completed')->values();
+
         return Inertia::render('admin/orders/index', [
-            'orders' => OrderResource::collection($orders)->resolve(),
+            'inProgressOrders' => OrderResource::collection($inProgressOrders)->resolve(),
+            'completedOrders' => OrderResource::collection($completedOrders)->resolve(),
         ]);
     }
 
