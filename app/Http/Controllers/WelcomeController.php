@@ -24,4 +24,17 @@ class WelcomeController extends Controller
             'gardenImages' => GardenImageResource::collection($gardenImages)->resolve(),
         ]);
     }
+
+    public function dashboard()
+    {
+        $products = Product::where('is_available', true)->get();
+        $gardenImages = GardenImage::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        return Inertia::render('dashboard', [
+            'products' => ProductResource::collection($products)->resolve(),
+            'gardenImages' => GardenImageResource::collection($gardenImages)->resolve(),
+        ]);
+    }
 }
