@@ -1,5 +1,5 @@
-import { Head } from '@inertiajs/react';
-import { ExternalLink, MapPin, X } from 'lucide-react';
+import { Head, router } from '@inertiajs/react';
+import { ExternalLink, LogOut, MapPin, ShoppingBag, X } from 'lucide-react';
 import { useState } from 'react';
 import { CartSidebar } from '@/components/cart-sidebar';
 import { DrinkCard } from '@/components/drink-card';
@@ -23,15 +23,44 @@ export default function Dashboard({
             <div className="bg-zinc-950 text-zinc-100">
                 <section className="relative px-4 pt-12 pb-6">
                     <div className="mx-auto max-w-7xl">
-                        <h1 className="text-3xl font-bold tracking-tight">
-                            Our{' '}
-                            <span className="text-amber-400">
-                                Signature Menu
-                            </span>
-                        </h1>
-                        <p className="mt-2 text-zinc-400">
-                            Handcrafted beverages made with love
-                        </p>
+                        <div className="flex items-start justify-between">
+                            <div>
+                                <h1 className="text-3xl font-bold tracking-tight">
+                                    Our{' '}
+                                    <span className="text-amber-400">
+                                        Signature Menu
+                                    </span>
+                                </h1>
+                                <p className="mt-2 text-zinc-400">
+                                    Handcrafted beverages made with love
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <a
+                                    href="/orders"
+                                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800"
+                                >
+                                    <ShoppingBag className="h-4 w-4" />
+                                    My Orders
+                                </a>
+                                <button
+                                    onClick={() =>
+                                        router.post(
+                                            '/logout',
+                                            {},
+                                            {
+                                                onFinish: () =>
+                                                    router.visit('/'),
+                                            },
+                                        )
+                                    }
+                                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
+                                >
+                                    <LogOut className="h-4 w-4" />
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
