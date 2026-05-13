@@ -1,5 +1,5 @@
-import { Head, router, usePage } from '@inertiajs/react';
-import { Trash2, Upload } from 'lucide-react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
+import { ArrowLeft, Trash2, Upload } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -66,6 +66,13 @@ export default function AdminGardenIndex({
             <Head title="Garden Gallery" />
 
             <div className="p-6">
+                <Link
+                    href="/admin"
+                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition hover:text-zinc-200"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back
+                </Link>
                 <h1 className="mb-6 text-2xl font-bold text-zinc-100">
                     Garden Gallery
                 </h1>

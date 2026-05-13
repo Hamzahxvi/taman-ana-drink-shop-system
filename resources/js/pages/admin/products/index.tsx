@@ -1,5 +1,5 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { Pencil, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, Pencil, Plus, Trash2 } from 'lucide-react';
 import type { Product } from '@/types';
 
 export default function AdminProductsIndex({
@@ -20,6 +20,13 @@ export default function AdminProductsIndex({
             <Head title="Menu Management" />
 
             <div className="p-6">
+                <Link
+                    href="/admin"
+                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition hover:text-zinc-200"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back
+                </Link>
                 <div className="mb-6 flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-zinc-100">
                         Menu Items

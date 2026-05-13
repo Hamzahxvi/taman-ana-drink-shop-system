@@ -1,5 +1,5 @@
-import { Head, router } from '@inertiajs/react';
-import { CheckCircle, Clock, CookingPot, MapPin, Truck } from 'lucide-react';
+import { Head, Link, router } from '@inertiajs/react';
+import { ArrowLeft, CheckCircle, Clock, CookingPot, MapPin, Truck } from 'lucide-react';
 import type { Order } from '@/types';
 
 const statusConfig = {
@@ -183,28 +183,28 @@ export default function AdminOrdersIndex({
                     {new Date(order.created_at).toLocaleString()}
                 </p>
 
-                <div className="flex gap-2">
-                    {order.status !== 'pending' && (
-                        <button
-                            onClick={() =>
-                                updateStatus(order.id, 'pending')
-                            }
-                            className="rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800"
-                        >
-                            Mark Pending
-                        </button>
-                    )}
-                    {order.status !== 'in-progress' && (
-                        <button
-                            onClick={() =>
-                                updateStatus(order.id, 'in-progress')
-                            }
-                            className="rounded-lg bg-blue-500/10 px-3 py-1.5 text-xs text-blue-400 hover:bg-blue-500/20"
-                        >
-                            Start Preparing
-                        </button>
-                    )}
-                    {order.status !== 'completed' && (
+                {order.status !== 'completed' && (
+                    <div className="flex gap-2">
+                        {order.status !== 'pending' && (
+                            <button
+                                onClick={() =>
+                                    updateStatus(order.id, 'pending')
+                                }
+                                className="rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800"
+                            >
+                                Mark Pending
+                            </button>
+                        )}
+                        {order.status !== 'in-progress' && (
+                            <button
+                                onClick={() =>
+                                    updateStatus(order.id, 'in-progress')
+                                }
+                                className="rounded-lg bg-blue-500/10 px-3 py-1.5 text-xs text-blue-400 hover:bg-blue-500/20"
+                            >
+                                Start Preparing
+                            </button>
+                        )}
                         <button
                             onClick={() =>
                                 updateStatus(order.id, 'completed')
@@ -213,8 +213,8 @@ export default function AdminOrdersIndex({
                         >
                             Complete
                         </button>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
         );
     };
@@ -224,6 +224,13 @@ export default function AdminOrdersIndex({
             <Head title="Order Management" />
 
             <div className="p-6">
+                <Link
+                    href="/admin"
+                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition hover:text-zinc-200"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back
+                </Link>
                 <h1 className="mb-6 text-2xl font-bold text-zinc-100">
                     Orders
                 </h1>
