@@ -1,5 +1,11 @@
 import { usePage } from '@inertiajs/react';
-import { ClipboardList, Coffee, Image, LayoutGrid, ShoppingBag } from 'lucide-react';
+import {
+    ClipboardList,
+    Coffee,
+    Image,
+    LayoutGrid,
+    ShoppingBag,
+} from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {

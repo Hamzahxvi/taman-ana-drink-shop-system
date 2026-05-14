@@ -160,9 +160,7 @@ export default function Orders({ orders }: { orders: Order[] }) {
                                                         const allExtras: string[] =
                                                             [];
 
-                                                        if (
-                                                            item.extra_milk
-                                                        ) {
+                                                        if (item.extra_milk) {
                                                             allExtras.push(
                                                                 'extra_milk',
                                                             );

@@ -1,5 +1,11 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { ClipboardList, Coffee, LogOut, ShoppingBag, TrendingUp } from 'lucide-react';
+import {
+    ClipboardList,
+    Coffee,
+    LogOut,
+    ShoppingBag,
+    TrendingUp,
+} from 'lucide-react';
 
 export default function AdminDashboard({
     stats,
@@ -51,9 +57,14 @@ export default function AdminDashboard({
                     </h1>
                     <button
                         onClick={() =>
-                            router.post('/logout', {}, {
-                                onFinish: () => window.location.href = '/',
-                            })
+                            router.post(
+                                '/logout',
+                                {},
+                                {
+                                    onFinish: () =>
+                                        (window.location.href = '/'),
+                                },
+                            )
                         }
                         className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
                     >

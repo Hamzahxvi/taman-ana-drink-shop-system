@@ -1,5 +1,12 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { ArrowLeft, CheckCircle, Clock, CookingPot, MapPin, Truck } from 'lucide-react';
+import {
+    ArrowLeft,
+    CheckCircle,
+    Clock,
+    CookingPot,
+    MapPin,
+    Truck,
+} from 'lucide-react';
 import type { Order } from '@/types';
 
 const statusConfig = {
@@ -32,7 +39,11 @@ const toppingLabels: Record<string, string> = {
     whipping_cream: 'Whipping Cream',
 };
 
-export default function AdminOrdersIndex({ orders = [] }: { orders?: Order[] }) {
+export default function AdminOrdersIndex({
+    orders = [],
+}: {
+    orders?: Order[];
+}) {
     const updateStatus = (orderId: number, status: string) => {
         router.patch(
             `/admin/orders/${orderId}/status`,
@@ -70,10 +81,13 @@ export default function AdminOrdersIndex({ orders = [] }: { orders?: Order[] }) 
                 <div className="space-y-4">
                     {orders.map((order) => {
                         const StatusIcon =
-                            statusConfig[order.status as keyof typeof statusConfig]?.icon ?? Clock;
+                            statusConfig[
+                                order.status as keyof typeof statusConfig
+                            ]?.icon ?? Clock;
                         const statusStyle =
-                            statusConfig[order.status as keyof typeof statusConfig]?.color ??
-                            'bg-zinc-500/10 text-zinc-400';
+                            statusConfig[
+                                order.status as keyof typeof statusConfig
+                            ]?.color ?? 'bg-zinc-500/10 text-zinc-400';
 
                         return (
                             <div
@@ -90,12 +104,17 @@ export default function AdminOrdersIndex({ orders = [] }: { orders?: Order[] }) 
                                                 className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyle}`}
                                             >
                                                 <StatusIcon className="h-3 w-3" />
-                                                {statusConfig[order.status as keyof typeof statusConfig]?.label}
+                                                {
+                                                    statusConfig[
+                                                        order.status as keyof typeof statusConfig
+                                                    ]?.label
+                                                }
                                             </span>
                                             <span className="inline-flex items-center gap-1 text-xs text-zinc-500">
                                                 <MapPin className="h-3 w-3" />
                                                 <span className="capitalize">
-                                                    {order.order_type === 'delivery'
+                                                    {order.order_type ===
+                                                    'delivery'
                                                         ? `Delivery${order.delivery_area ? ` — ${order.delivery_area}` : ''}`
                                                         : 'Pickup'}
                                                 </span>
@@ -105,20 +124,36 @@ export default function AdminOrdersIndex({ orders = [] }: { orders?: Order[] }) 
                                             {order.customer_name || 'Guest'}
                                         </p>
                                         {order.customer_contact && (
-                                            <p className="text-sm text-zinc-500">{order.customer_contact}</p>
+                                            <p className="text-sm text-zinc-500">
+                                                {order.customer_contact}
+                                            </p>
                                         )}
-                                        {order.order_type === 'delivery' && order.customer_address && (
-                                            <p className="text-sm text-zinc-500">{order.customer_address}</p>
-                                        )}
+                                        {order.order_type === 'delivery' &&
+                                            order.customer_address && (
+                                                <p className="text-sm text-zinc-500">
+                                                    {order.customer_address}
+                                                </p>
+                                            )}
                                         <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-zinc-500">
                                             {order.payment_method && (
                                                 <span className="inline-flex items-center gap-1">
                                                     <Truck className="h-3 w-3" />
-                                                    {order.payment_method === 'duitnow' ? 'DuitNow' : 'Cash'}
+                                                    {order.payment_method ===
+                                                    'duitnow'
+                                                        ? 'DuitNow'
+                                                        : 'Cash'}
                                                 </span>
                                             )}
-                                            {order.pickup_time && <span>Pickup: {order.pickup_time}</span>}
-                                            {order.table_number && <span>Table: {order.table_number}</span>}
+                                            {order.pickup_time && (
+                                                <span>
+                                                    Pickup: {order.pickup_time}
+                                                </span>
+                                            )}
+                                            {order.table_number && (
+                                                <span>
+                                                    Table: {order.table_number}
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                     <span className="text-lg font-bold text-amber-400">
@@ -128,38 +163,66 @@ export default function AdminOrdersIndex({ orders = [] }: { orders?: Order[] }) 
 
                                 <div className="mb-3 space-y-1">
                                     {order.items.map((item) => (
-                                        <div key={item.id} className="rounded-lg bg-zinc-800/50 p-2">
+                                        <div
+                                            key={item.id}
+                                            className="rounded-lg bg-zinc-800/50 p-2"
+                                        >
                                             <div className="flex items-center justify-between text-sm">
                                                 <span className="font-medium text-zinc-300">
-                                                    {item.quantity}x {item.product_name}
+                                                    {item.quantity}x{' '}
+                                                    {item.product_name}
                                                 </span>
-                                                <span className="text-zinc-400">RM {item.subtotal.toFixed(2)}</span>
+                                                <span className="text-zinc-400">
+                                                    RM{' '}
+                                                    {item.subtotal.toFixed(2)}
+                                                </span>
                                             </div>
                                             <div className="mt-1 flex flex-wrap gap-1">
                                                 <span
                                                     className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs ${
-                                                        item.temperature === 'hot'
+                                                        item.temperature ===
+                                                        'hot'
                                                             ? 'bg-orange-500/10 text-orange-400'
                                                             : 'bg-cyan-500/10 text-cyan-400'
                                                     }`}
                                                 >
-                                                    {item.temperature === 'hot' ? 'Hot' : 'Cold'}
+                                                    {item.temperature === 'hot'
+                                                        ? 'Hot'
+                                                        : 'Cold'}
                                                 </span>
                                                 <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400">
-                                                    {sweetnessLabels[item.sweetness] ?? item.sweetness}
+                                                    {sweetnessLabels[
+                                                        item.sweetness
+                                                    ] ?? item.sweetness}
                                                 </span>
                                                 {(() => {
-                                                    const allExtras: string[] = [];
-                                                    if (item.extra_milk) allExtras.push('extra_milk');
-                                                    if (item.toppings) allExtras.push(...item.toppings);
-                                                    return allExtras.map((slug) => (
-                                                        <span
-                                                            key={slug}
-                                                            className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400"
-                                                        >
-                                                            {toppingLabels[slug] ?? slug}
-                                                        </span>
-                                                    ));
+                                                    const allExtras: string[] =
+                                                        [];
+
+                                                    if (item.extra_milk) {
+                                                        allExtras.push(
+                                                            'extra_milk',
+                                                        );
+                                                    }
+
+                                                    if (item.toppings) {
+                                                        allExtras.push(
+                                                            ...item.toppings,
+                                                        );
+                                                    }
+
+                                                    return allExtras.map(
+                                                        (slug) => (
+                                                            <span
+                                                                key={slug}
+                                                                className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400"
+                                                            >
+                                                                {toppingLabels[
+                                                                    slug
+                                                                ] ?? slug}
+                                                            </span>
+                                                        ),
+                                                    );
                                                 })()}
                                             </div>
                                             {item.remark && (
@@ -178,13 +241,20 @@ export default function AdminOrdersIndex({ orders = [] }: { orders?: Order[] }) 
                                 )}
 
                                 <p className="mb-3 text-xs text-zinc-600">
-                                    {new Date(order.created_at).toLocaleString()}
+                                    {new Date(
+                                        order.created_at,
+                                    ).toLocaleString()}
                                 </p>
 
                                 <div className="flex gap-2">
                                     {order.status !== 'pending' && (
                                         <button
-                                            onClick={() => updateStatus(order.id, 'pending')}
+                                            onClick={() =>
+                                                updateStatus(
+                                                    order.id,
+                                                    'pending',
+                                                )
+                                            }
                                             className="rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800"
                                         >
                                             Mark Pending
@@ -192,14 +262,21 @@ export default function AdminOrdersIndex({ orders = [] }: { orders?: Order[] }) 
                                     )}
                                     {order.status !== 'in-progress' && (
                                         <button
-                                            onClick={() => updateStatus(order.id, 'in-progress')}
+                                            onClick={() =>
+                                                updateStatus(
+                                                    order.id,
+                                                    'in-progress',
+                                                )
+                                            }
                                             className="rounded-lg bg-blue-500/10 px-3 py-1.5 text-xs text-blue-400 hover:bg-blue-500/20"
                                         >
                                             Start Preparing
                                         </button>
                                     )}
                                     <button
-                                        onClick={() => updateStatus(order.id, 'completed')}
+                                        onClick={() =>
+                                            updateStatus(order.id, 'completed')
+                                        }
                                         className="rounded-lg bg-green-500/10 px-3 py-1.5 text-xs text-green-400 hover:bg-green-500/20"
                                     >
                                         Complete

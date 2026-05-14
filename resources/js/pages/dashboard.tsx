@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { CartSidebar } from '@/components/cart-sidebar';
 import { DrinkCard } from '@/components/drink-card';
 import { CartProvider } from '@/contexts/cart-context';
-import type { GardenImage, Product } from '@/types';
 import { dashboard } from '@/routes';
+import type { GardenImage, Product } from '@/types';
 
 export default function Dashboard({
     products = [],
@@ -76,7 +76,11 @@ export default function Dashboard({
                     <div className="mx-auto max-w-7xl">
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {products.map((product) => (
-                                <DrinkCard key={product.id} product={product} extras={extras} />
+                                <DrinkCard
+                                    key={product.id}
+                                    product={product}
+                                    extras={extras}
+                                />
                             ))}
                         </div>
                     </div>

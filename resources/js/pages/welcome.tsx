@@ -50,7 +50,11 @@ export default function Welcome({
 
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {products.map((product) => (
-                                <DrinkCard key={product.id} product={product} extras={extras} />
+                                <DrinkCard
+                                    key={product.id}
+                                    product={product}
+                                    extras={extras}
+                                />
                             ))}
                         </div>
                     </div>

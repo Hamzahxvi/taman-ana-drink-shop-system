@@ -191,8 +191,7 @@ export function DrinkCustomizationDialog({
                                     >
                                         <div className="flex items-center gap-3">
                                             <span className="text-xl">
-                                                {iconMap[extra.slug] ||
-                                                    '+'}
+                                                {iconMap[extra.slug] || '+'}
                                             </span>
                                             <span className="text-sm text-zinc-200">
                                                 {extra.name}

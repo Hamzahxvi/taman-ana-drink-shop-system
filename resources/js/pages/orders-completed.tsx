@@ -52,7 +52,7 @@ export default function OrdersCompleted({ orders }: { orders: Order[] }) {
                                                     Order #{order.id}
                                                 </span>
                                                 <span
-                                                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-500/10 text-green-400`}
+                                                    className={`inline-flex items-center gap-1 rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-400`}
                                                 >
                                                     <CheckCircle className="h-3 w-3" />
                                                     Completed
@@ -124,9 +124,7 @@ export default function OrdersCompleted({ orders }: { orders: Order[] }) {
                                                         const allExtras: string[] =
                                                             [];
 
-                                                        if (
-                                                            item.extra_milk
-                                                        ) {
+                                                        if (item.extra_milk) {
                                                             allExtras.push(
                                                                 'extra_milk',
                                                             );

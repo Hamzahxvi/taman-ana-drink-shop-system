@@ -14,7 +14,11 @@ const toppingLabels: Record<string, string> = {
     whipping_cream: 'Whipping Cream',
 };
 
-export default function AdminOrdersCompleted({ orders = [] }: { orders?: Order[] }) {
+export default function AdminOrdersCompleted({
+    orders = [],
+}: {
+    orders?: Order[];
+}) {
     return (
         <>
             <Head title="Orders — Completed" />
@@ -69,20 +73,36 @@ export default function AdminOrdersCompleted({ orders = [] }: { orders?: Order[]
                                         {order.customer_name || 'Guest'}
                                     </p>
                                     {order.customer_contact && (
-                                        <p className="text-sm text-zinc-500">{order.customer_contact}</p>
+                                        <p className="text-sm text-zinc-500">
+                                            {order.customer_contact}
+                                        </p>
                                     )}
-                                    {order.order_type === 'delivery' && order.customer_address && (
-                                        <p className="text-sm text-zinc-500">{order.customer_address}</p>
-                                    )}
+                                    {order.order_type === 'delivery' &&
+                                        order.customer_address && (
+                                            <p className="text-sm text-zinc-500">
+                                                {order.customer_address}
+                                            </p>
+                                        )}
                                     <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-zinc-500">
                                         {order.payment_method && (
                                             <span className="inline-flex items-center gap-1">
                                                 <Truck className="h-3 w-3" />
-                                                {order.payment_method === 'duitnow' ? 'DuitNow' : 'Cash'}
+                                                {order.payment_method ===
+                                                'duitnow'
+                                                    ? 'DuitNow'
+                                                    : 'Cash'}
                                             </span>
                                         )}
-                                        {order.pickup_time && <span>Pickup: {order.pickup_time}</span>}
-                                        {order.table_number && <span>Table: {order.table_number}</span>}
+                                        {order.pickup_time && (
+                                            <span>
+                                                Pickup: {order.pickup_time}
+                                            </span>
+                                        )}
+                                        {order.table_number && (
+                                            <span>
+                                                Table: {order.table_number}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <span className="text-lg font-bold text-amber-400">
@@ -92,12 +112,18 @@ export default function AdminOrdersCompleted({ orders = [] }: { orders?: Order[]
 
                             <div className="mb-3 space-y-1">
                                 {order.items.map((item) => (
-                                    <div key={item.id} className="rounded-lg bg-zinc-800/50 p-2">
+                                    <div
+                                        key={item.id}
+                                        className="rounded-lg bg-zinc-800/50 p-2"
+                                    >
                                         <div className="flex items-center justify-between text-sm">
                                             <span className="font-medium text-zinc-300">
-                                                {item.quantity}x {item.product_name}
+                                                {item.quantity}x{' '}
+                                                {item.product_name}
                                             </span>
-                                            <span className="text-zinc-400">RM {item.subtotal.toFixed(2)}</span>
+                                            <span className="text-zinc-400">
+                                                RM {item.subtotal.toFixed(2)}
+                                            </span>
                                         </div>
                                         <div className="mt-1 flex flex-wrap gap-1">
                                             <span
@@ -107,21 +133,37 @@ export default function AdminOrdersCompleted({ orders = [] }: { orders?: Order[]
                                                         : 'bg-cyan-500/10 text-cyan-400'
                                                 }`}
                                             >
-                                                {item.temperature === 'hot' ? 'Hot' : 'Cold'}
+                                                {item.temperature === 'hot'
+                                                    ? 'Hot'
+                                                    : 'Cold'}
                                             </span>
                                             <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400">
-                                                {sweetnessLabels[item.sweetness] ?? item.sweetness}
+                                                {sweetnessLabels[
+                                                    item.sweetness
+                                                ] ?? item.sweetness}
                                             </span>
                                             {(() => {
                                                 const allExtras: string[] = [];
-                                                if (item.extra_milk) allExtras.push('extra_milk');
-                                                if (item.toppings) allExtras.push(...item.toppings);
+
+                                                if (item.extra_milk) {
+                                                    allExtras.push(
+                                                        'extra_milk',
+                                                    );
+                                                }
+
+                                                if (item.toppings) {
+                                                    allExtras.push(
+                                                        ...item.toppings,
+                                                    );
+                                                }
+
                                                 return allExtras.map((slug) => (
                                                     <span
                                                         key={slug}
                                                         className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400"
                                                     >
-                                                        {toppingLabels[slug] ?? slug}
+                                                        {toppingLabels[slug] ??
+                                                            slug}
                                                     </span>
                                                 ));
                                             })()}

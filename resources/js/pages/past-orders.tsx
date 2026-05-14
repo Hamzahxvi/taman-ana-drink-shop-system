@@ -36,10 +36,10 @@ export default function PastOrders() {
 
         let cancelled = false;
 
-        const fetchOrders = () => {
-        fetch(`/orders/lookup?phone=${encodeURIComponent(phone)}`, {
-            headers: { Accept: 'application/json' },
-        })
+        const fetchOrders = (customerPhone: string) => {
+            fetch(`/orders/lookup?phone=${encodeURIComponent(customerPhone)}`, {
+                headers: { Accept: 'application/json' },
+            })
                 .then((r) => r.json())
                 .then((data) => {
                     if (!cancelled) {
@@ -75,18 +75,13 @@ export default function PastOrders() {
                 <div className="mx-auto max-w-lg px-4 py-12">
                     <div className="mb-8 text-center">
                         <h1 className="text-3xl font-bold">
-                            My{' '}
-                            <span className="text-amber-400">Orders</span>
+                            My <span className="text-amber-400">Orders</span>
                         </h1>
-                        <p className="mt-2 text-zinc-400">
-                            Your order history
-                        </p>
+                        <p className="mt-2 text-zinc-400">Your order history</p>
                     </div>
 
                     {isLoading ? (
-                        <p className="text-center text-zinc-500">
-                            Loading...
-                        </p>
+                        <p className="text-center text-zinc-500">Loading...</p>
                     ) : orders.length === 0 ? (
                         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 text-center">
                             <p className="text-zinc-400">No orders found</p>
@@ -129,8 +124,9 @@ export default function PastOrders() {
                                                             className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyle}`}
                                                         >
                                                             <StatusIcon className="h-3 w-3" />
-                                                            {statusConfig[order.status]
-                                                                ?.label ??
+                                                            {statusConfig[
+                                                                order.status
+                                                            ]?.label ??
                                                                 order.status}
                                                         </span>
                                                         <span className="text-xs text-zinc-500 capitalize">

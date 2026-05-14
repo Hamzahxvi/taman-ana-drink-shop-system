@@ -65,7 +65,11 @@ export default function AdminProductsIndex({
     const handleToggleExtra = (extra: ExtraData) => {
         router.put(
             `/admin/extras/${extra.id}`,
-            { name: extra.name, price: extra.price, is_active: !extra.is_active },
+            {
+                name: extra.name,
+                price: extra.price,
+                is_active: !extra.is_active,
+            },
             { preserveScroll: true },
         );
     };
@@ -194,9 +198,7 @@ export default function AdminProductsIndex({
                 </div>
 
                 <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-xl font-bold text-zinc-100">
-                        Extras
-                    </h2>
+                    <h2 className="text-xl font-bold text-zinc-100">Extras</h2>
                     <button
                         onClick={() => {
                             resetExtraForm();
@@ -225,7 +227,9 @@ export default function AdminProductsIndex({
                                 <input
                                     type="text"
                                     value={extraName}
-                                    onChange={(e) => setExtraName(e.target.value)}
+                                    onChange={(e) =>
+                                        setExtraName(e.target.value)
+                                    }
                                     className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500"
                                     placeholder="e.g. Extra Milk"
                                     required
@@ -240,7 +244,9 @@ export default function AdminProductsIndex({
                                     step="0.50"
                                     min="0"
                                     value={extraPrice}
-                                    onChange={(e) => setExtraPrice(e.target.value)}
+                                    onChange={(e) =>
+                                        setExtraPrice(e.target.value)
+                                    }
                                     className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100"
                                     placeholder="0.50"
                                     required
@@ -271,8 +277,12 @@ export default function AdminProductsIndex({
                             <tr className="border-b border-zinc-800 text-left text-sm text-zinc-400">
                                 <th className="px-5 py-3 font-medium">Name</th>
                                 <th className="px-5 py-3 font-medium">Price</th>
-                                <th className="px-5 py-3 font-medium">Active</th>
-                                <th className="px-5 py-3 font-medium">Actions</th>
+                                <th className="px-5 py-3 font-medium">
+                                    Active
+                                </th>
+                                <th className="px-5 py-3 font-medium">
+                                    Actions
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="text-sm">
@@ -289,26 +299,34 @@ export default function AdminProductsIndex({
                                     </td>
                                     <td className="px-5 py-3">
                                         <button
-                                            onClick={() => handleToggleExtra(extra)}
+                                            onClick={() =>
+                                                handleToggleExtra(extra)
+                                            }
                                             className={`rounded-full px-3 py-0.5 text-xs font-medium transition ${
                                                 extra.is_active
                                                     ? 'bg-green-500/10 text-green-400'
                                                     : 'bg-zinc-700 text-zinc-500'
                                             }`}
                                         >
-                                            {extra.is_active ? 'Active' : 'Inactive'}
+                                            {extra.is_active
+                                                ? 'Active'
+                                                : 'Inactive'}
                                         </button>
                                     </td>
                                     <td className="px-5 py-3">
                                         <div className="flex items-center gap-1">
                                             <button
-                                                onClick={() => handleEditExtra(extra)}
+                                                onClick={() =>
+                                                    handleEditExtra(extra)
+                                                }
                                                 className="rounded p-1 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
                                             >
                                                 <Pencil className="h-4 w-4" />
                                             </button>
                                             <button
-                                                onClick={() => handleDeleteExtra(extra)}
+                                                onClick={() =>
+                                                    handleDeleteExtra(extra)
+                                                }
                                                 className="rounded p-1 text-zinc-400 hover:bg-red-500/10 hover:text-red-400"
                                             >
                                                 <Trash2 className="h-4 w-4" />

@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
 Route::get('/build/{path}', function ($path) {
-    $file = public_path('build/' . $path);
+    $file = public_path('build/'.$path);
 
-    if (!file_exists($file)) {
+    if (! file_exists($file)) {
         abort(404);
     }
 

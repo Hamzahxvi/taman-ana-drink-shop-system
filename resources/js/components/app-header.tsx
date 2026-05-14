@@ -24,7 +24,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
         <>
             <div className="border-b border-sidebar-border/80">
                 <div className="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
-                    <div className="font-semibold text-sm">Taman Ana</div>
+                    <div className="text-sm font-semibold">Taman Ana</div>
 
                     <div className="ml-auto flex items-center space-x-2">
                         <DropdownMenu>

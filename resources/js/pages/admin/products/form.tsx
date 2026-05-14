@@ -37,7 +37,7 @@ export default function AdminProductForm({
         icon: product?.icon ?? '',
         category: product?.category ?? '',
         is_available: product?.is_available ?? true,
-        extra_ids: product?.extra_ids ?? [] as number[],
+        extra_ids: product?.extra_ids ?? ([] as number[]),
     });
 
     const [image, setImage] = useState<File | null>(null);
@@ -240,17 +240,16 @@ export default function AdminProductForm({
                                             onChange={(e) => {
                                                 setForm({
                                                     ...form,
-                                                    extra_ids: e.target
-                                                        .checked
+                                                    extra_ids: e.target.checked
                                                         ? [
-                                                                ...form.extra_ids,
-                                                                extra.id,
-                                                            ]
+                                                              ...form.extra_ids,
+                                                              extra.id,
+                                                          ]
                                                         : form.extra_ids.filter(
-                                                                (id) =>
-                                                                    id !==
-                                                                    extra.id,
-                                                            ),
+                                                              (id) =>
+                                                                  id !==
+                                                                  extra.id,
+                                                          ),
                                                 });
                                             }}
                                             className="h-4 w-4 rounded border-zinc-600 bg-zinc-800 text-amber-500 focus:ring-amber-500"

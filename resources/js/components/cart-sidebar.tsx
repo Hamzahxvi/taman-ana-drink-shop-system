@@ -46,9 +46,7 @@ export function CartSidebar() {
     const [orderType, setOrderType] = useState<'pickup' | 'delivery'>('pickup');
     const [deliveryArea, setDeliveryArea] = useState('');
     const [customerName, setCustomerName] = useState(user?.name ?? '');
-    const [customerContact, setCustomerContact] = useState(
-        user?.phone ?? '',
-    );
+    const [customerContact, setCustomerContact] = useState(user?.phone ?? '');
     const [useRegisteredPhone, setUseRegisteredPhone] = useState(
         user?.phone ? true : false,
     );
@@ -104,7 +102,7 @@ export function CartSidebar() {
             {
                 customer_name: customerName,
                 customer_contact: useRegisteredPhone
-                    ? user?.phone ?? customerContact
+                    ? (user?.phone ?? customerContact)
                     : customerContact,
                 order_type: orderType,
                 delivery_area: orderType === 'delivery' ? deliveryArea : null,
@@ -322,15 +320,15 @@ export function CartSidebar() {
                                                             checked,
                                                         ) => {
                                                             setUseRegisteredPhone(
-                                                                checked === true,
+                                                                checked ===
+                                                                    true,
                                                             );
 
                                                             if (
                                                                 checked === true
                                                             ) {
                                                                 setCustomerContact(
-                                                                    user
-                                                                        ?.phone ??
+                                                                    user?.phone ??
                                                                         '',
                                                                 );
                                                             }

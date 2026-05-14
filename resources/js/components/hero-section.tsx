@@ -2,11 +2,7 @@ import { Link, router, usePage } from '@inertiajs/react';
 import { ArrowDown, Coffee, LogOut, MapPin } from 'lucide-react';
 import { login, register } from '@/routes';
 
-export function HeroSection({
-    hasPastOrder,
-}: {
-    hasPastOrder?: boolean;
-}) {
+export function HeroSection({ hasPastOrder }: { hasPastOrder?: boolean }) {
     const { auth } = usePage().props;
     const user = auth?.user;
     const canRegister =
