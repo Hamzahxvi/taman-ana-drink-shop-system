@@ -15,15 +15,14 @@ RUN apt-get update && apt-get install -y \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
+ARG CACHEBUST=2
+
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html
 
 WORKDIR /var/www/html
-
-ARG CACHEBUST=1
-RUN echo "build-v2"
 
 RUN cp .env.example .env \
     && touch database/database.sqlite \
