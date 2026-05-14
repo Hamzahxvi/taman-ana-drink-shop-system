@@ -1,4 +1,4 @@
-# Taman Ana — Garden Drink Shop System
+# Taman Ana - Garden Drink Shop System
 
 A full-stack drink ordering system for **Taman Ana**, a garden-themed beverage shop in Bukit Changgang, Banting, Selangor.
 
@@ -16,56 +16,72 @@ A full-stack drink ordering system for **Taman Ana**, a garden-themed beverage s
 ## Features
 
 ### Customer Ordering Flow
-- **Guest-first design** — No account required to order
-- **Self Pickup or Delivery** — Delivery available for Bukit Changgang, Labohan Dagang, Olak Lempit, RTB
-- **Full drink customization** — Hot/Cold, sweetness level, extras (admin-managed add-ons), special remarks
-- **Smart cart** — Identical drink configurations are grouped, different variants stay separate
-- **One-tap order tracking** — Real-time order status updates via public tracking page
-- **PDF receipt** — Downloadable receipt for every order
+
+- **Guest-first design** - no account required to order
+- **Self pickup or delivery** - delivery available for Bukit Changgang, Labohan Dagang, Olak Lempit, and RTB
+- **Full drink customization** - hot/cold, sweetness level, extras, and special remarks
+- **Smart cart** - identical drink configurations are grouped, different variants stay separate
+- **One-tap order tracking** - public tracking page for order status updates
+- **PDF receipt** - downloadable receipt for every order
 
 ### Registered Customers
-- **Account with phone number** — Registration captures name, email, phone, password
-- **Order history** — In-progress and completed orders with status badges and full item breakdowns
-- **Print receipts** — Download PDF receipts for completed orders
 
-### Admin Panel (`/admin`)
-- **Dashboard** — Daily stats, popular items, revenue overview
-- **Order management** — View in-progress orders, update status (Pending → In Progress → Completed), separate completed orders page
-- **Menu management** — Add/edit/delete products with emoji icons, categories, images, and per-product extras
-- **Extras management** — Manage add-ons (Extra Milk, Oreo Crumbles, Whipping Cream) with pricing — integrated into the menu page
-- **Garden gallery** — Upload and manage garden images with captions
+- **Account with phone number** - registration captures name, email, phone, and password
+- **Order history** - in-progress and completed orders with status badges and item breakdowns
+- **Print receipts** - download PDF receipts for completed orders
+
+### Staff Panel (`/admin`)
+
+- **Dashboard** - daily stats, popular items, and revenue overview
+- **Order management** - view in-progress orders, update status, and view completed orders
+- **Menu management** - add, edit, and delete products with icons, categories, images, and per-product extras
+- **Extras management** - manage add-ons such as Extra Milk, Oreo Crumbles, and Whipping Cream
+
+### Admin-Only Management
+
+- **Account management** - view, update, and delete customer and staff accounts
+- **Role control** - promote customers to staff or change staff back to customer
+- **Garden gallery** - upload and manage garden images with captions
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Backend | Laravel 13, PHP 8.4+ |
-| Auth | Laravel Fortify (login, register, password reset, email verification, 2FA) |
-| Frontend | React 19, Inertia.js 3, TypeScript |
-| Styling | Tailwind CSS 4, Radix UI primitives |
-| Database | SQLite (dev), PostgreSQL (production) |
-| PDF | barryvdh/laravel-dompdf |
-| Testing | Pest 4 |
-| Tooling | Vite 8, ESLint, Prettier, Pint |
+| Layer    | Technology                                                                 |
+| -------- | -------------------------------------------------------------------------- |
+| Backend  | Laravel 13, PHP 8.4+                                                       |
+| Auth     | Laravel Fortify (login, register, password reset, email verification, 2FA) |
+| Frontend | React 19, Inertia.js 3, TypeScript                                         |
+| Styling  | Tailwind CSS 4, Radix UI primitives                                        |
+| Database | SQLite (dev), PostgreSQL (production)                                      |
+| PDF      | barryvdh/laravel-dompdf                                                    |
+| Testing  | Pest 4                                                                     |
+| Tooling  | Vite 8, ESLint, Prettier, Pint                                             |
 
 ---
 
 ## Default Accounts
 
-| Role | Email | Password |
-|---|---|---|
-| Admin | `admin@tamanana.com` | `password` |
+| Role     | Email                  | Password   |
+| -------- | ---------------------- | ---------- |
+| Admin    | `admin@tamanana.com`   | `password` |
+| Staff    | `staff@tamanana.com`   | `password` |
 | Customer | `customer@example.com` | `password` |
 
-Admin panel: `/admin`
+Staff/admin panel: `/admin`
+
+Role access:
+
+- **Admin**: orders, menu, extras, customer/staff account management, garden gallery
+- **Staff**: orders, menu, extras
+- **Customer**: ordering flow and personal order history
 
 ---
 
 ## Local Development
 
 ### Prerequisites
+
 - PHP 8.4+
 - Composer
 - Node.js 18+
@@ -102,6 +118,7 @@ npm run types:check   # TypeScript static check
 npm run lint          # ESLint with auto-fix
 npm run format        # Prettier formatting
 composer ci:check     # Full CI: lint + format + types + tests
+composer test         # Clear config, run Pint check, then run Pest
 php artisan test      # Run Pest tests
 ```
 
@@ -109,36 +126,43 @@ php artisan test      # Run Pest tests
 
 ## Deployment
 
-### Render (Free)
+### Render
 
-1. Push to GitHub
-2. Go to [dashboard.render.com](https://dashboard.render.com) → New → Blueprint
-3. Connect your repo — Render reads `render.yaml` and auto-creates:
-   - Web Service (Docker, PHP 8.4 + Apache)
-   - PostgreSQL database (free tier)
-4. Click Apply — first deploy takes ~5 minutes
+1. Push to GitHub.
+2. Go to [dashboard.render.com](https://dashboard.render.com), then create a new Blueprint.
+3. Connect your repository. Render reads `render.yaml` and creates the web service and PostgreSQL database.
+4. Apply the blueprint and wait for the first deploy to complete.
 
 ---
 
 ## Key Routes
 
-| Method | Path | Auth | Description |
-|---|---|---|---|
-| GET | `/` | Public | Landing page with menu, cart, garden gallery |
-| POST | `/orders` | Public | Place a new order |
-| GET | `/orders/{id}/track` | Public | Track order status |
-| GET | `/orders/{id}/receipt` | Public | Download PDF receipt |
-| GET | `/past-orders` | Public | My Orders (lookup by phone) |
-| GET | `/dashboard` | Auth | Customer dashboard with menu |
-| GET | `/orders` | Auth | In-progress orders |
-| GET | `/orders/completed` | Auth | Completed orders with receipt download |
-| GET | `/login` | Guest | Login page |
-| GET | `/register` | Guest | Registration page |
-| GET | `/admin` | Admin | Admin dashboard |
-| GET | `/admin/orders` | Admin | In-progress orders |
-| GET | `/admin/orders/completed` | Admin | Completed orders |
-| GET | `/admin/products` | Admin | Menu + extras management |
-| GET | `/admin/garden` | Admin | Garden gallery management |
+| Method | Path                        | Auth        | Description                                  |
+| ------ | --------------------------- | ----------- | -------------------------------------------- |
+| GET    | `/`                         | Public      | Landing page with menu, cart, garden gallery |
+| POST   | `/orders`                   | Public      | Place a new order                            |
+| GET    | `/orders/{id}/track`        | Public      | Track order status                           |
+| GET    | `/orders/{id}/receipt`      | Public      | Download PDF receipt                         |
+| GET    | `/past-orders`              | Public      | My Orders lookup by phone                    |
+| GET    | `/dashboard`                | Auth        | Customer dashboard with menu                 |
+| GET    | `/orders`                   | Auth        | Customer in-progress orders                  |
+| GET    | `/orders/completed`         | Auth        | Customer completed orders                    |
+| GET    | `/login`                    | Guest       | Login page                                   |
+| GET    | `/register`                 | Guest       | Registration page                            |
+| GET    | `/admin`                    | Admin/Staff | Management dashboard                         |
+| GET    | `/admin/orders`             | Admin/Staff | In-progress orders                           |
+| GET    | `/admin/orders/completed`   | Admin/Staff | Completed orders                             |
+| PATCH  | `/admin/orders/{id}/status` | Admin/Staff | Update order status                          |
+| GET    | `/admin/products`           | Admin/Staff | Menu and extras management                   |
+| GET    | `/admin/products/create`    | Admin/Staff | Create menu item                             |
+| GET    | `/admin/products/{id}/edit` | Admin/Staff | Edit menu item                               |
+| POST   | `/admin/extras`             | Admin/Staff | Create extra                                 |
+| PUT    | `/admin/extras/{id}`        | Admin/Staff | Update extra                                 |
+| DELETE | `/admin/extras/{id}`        | Admin/Staff | Delete extra                                 |
+| GET    | `/admin/users`              | Admin       | Customer/staff account management            |
+| PUT    | `/admin/users/{id}`         | Admin       | Update customer/staff account                |
+| DELETE | `/admin/users/{id}`         | Admin       | Delete customer/staff account                |
+| GET    | `/admin/garden`             | Admin       | Garden gallery management                    |
 
 ---
 
