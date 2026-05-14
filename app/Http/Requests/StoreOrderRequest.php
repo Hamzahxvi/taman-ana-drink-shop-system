@@ -11,6 +11,34 @@ class StoreOrderRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $items = $this->input('items');
+
+        if (! is_array($items)) {
+            return;
+        }
+
+        $this->merge([
+            'items' => array_map(function ($item) {
+                if (! is_array($item) || ! isset($item['toppings']) || ! is_array($item['toppings'])) {
+                    return $item;
+                }
+
+                $item['toppings'] = array_map(
+                    fn ($topping) => match ($topping) {
+                        'oreo-crumbles' => 'oreo_crumbles',
+                        'whipping-cream' => 'whipping_cream',
+                        default => $topping,
+                    },
+                    $item['toppings'],
+                );
+
+                return $item;
+            }, $items),
+        ]);
+    }
+
     public function rules(): array
     {
         return [

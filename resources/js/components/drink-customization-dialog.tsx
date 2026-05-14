@@ -33,6 +33,11 @@ const iconMap: Record<string, string> = {
     'whipping-cream': '+',
 };
 
+const toppingSlugMap: Record<string, string> = {
+    'oreo-crumbles': 'oreo_crumbles',
+    'whipping-cream': 'whipping_cream',
+};
+
 export function DrinkCustomizationDialog({
     product,
     extras = [],
@@ -84,9 +89,9 @@ export function DrinkCustomizationDialog({
 
     const handleAdd = () => {
         const extraMilk = selectedExtras.has('extra-milk');
-        const toppingSlugs = Array.from(selectedExtras).filter(
-            (s) => s !== 'extra-milk',
-        );
+        const toppingSlugs = Array.from(selectedExtras)
+            .filter((s) => s !== 'extra-milk')
+            .map((s) => toppingSlugMap[s] ?? s);
 
         onAdd({
             temperature,
