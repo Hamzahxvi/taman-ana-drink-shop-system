@@ -21,6 +21,8 @@ if (\App\Models\Extra::count() === 0) {
 }
 "
 
+php artisan db:seed --force --class=DatabaseSeeder
+
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
