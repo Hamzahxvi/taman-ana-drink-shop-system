@@ -22,9 +22,11 @@ COPY . /var/www/html
 
 WORKDIR /var/www/html
 
+ARG CACHEBUST=1
+RUN rm -rf public/build
+
 RUN composer install --no-interaction --optimize-autoloader --no-dev \
     && npm ci \
-    && rm -rf public/build \
     && npm run build \
     && chown -R www-data:www-data /var/www/html/storage \
     && chown -R www-data:www-data /var/www/html/bootstrap/cache
