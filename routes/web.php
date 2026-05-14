@@ -43,6 +43,7 @@ Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/orders/{order}/track', [OrderController::class, 'track'])->name('orders.track');
 Route::get('/orders/{order}/receipt', [OrderController::class, 'receipt'])->name('orders.receipt');
 Route::get('/orders/lookup', [OrderController::class, 'lookup'])->name('orders.lookup');
+Route::get('/garden-images/{gardenImage}/image', [GardenImageController::class, 'image'])->name('garden-images.image');
 Route::inertia('past-orders', 'past-orders')->name('past-orders');
 
 Route::middleware(['auth', 'verified'])->group(function () {

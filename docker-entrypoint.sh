@@ -19,6 +19,7 @@ touch database/database.sqlite
 
 php artisan migrate --force
 php artisan db:seed --force --class=DatabaseSeeder
+php artisan storage:link --force
 
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['image_path', 'caption', 'sort_order', 'is_active'])]
+#[Fillable(['image_path', 'image_data', 'image_mime_type', 'caption', 'sort_order', 'is_active'])]
 class GardenImage extends Model
 {
     protected function casts(): array
