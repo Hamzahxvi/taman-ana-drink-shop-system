@@ -15,7 +15,9 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $products = Product::where('is_available', true)->get();
+        $products = Product::where('is_available', true)
+            ->with(['extras' => fn ($q) => $q->where('is_active', true)->orderBy('name')])
+            ->get();
         $gardenImages = GardenImage::where('is_active', true)
             ->orderBy('sort_order')
             ->get();
@@ -30,7 +32,9 @@ class WelcomeController extends Controller
 
     public function dashboard()
     {
-        $products = Product::where('is_available', true)->get();
+        $products = Product::where('is_available', true)
+            ->with(['extras' => fn ($q) => $q->where('is_active', true)->orderBy('name')])
+            ->get();
         $gardenImages = GardenImage::where('is_active', true)
             ->orderBy('sort_order')
             ->get();

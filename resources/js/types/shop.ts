@@ -8,6 +8,7 @@ export type Product = {
     image: string | null;
     category: string;
     is_available: boolean;
+    extra_ids?: number[];
 };
 
 export type CartItem = {

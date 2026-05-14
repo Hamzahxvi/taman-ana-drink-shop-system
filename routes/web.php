@@ -40,7 +40,6 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::post('/garden/{gardenImage}', [GardenImageController::class, 'update'])->name('garden.update');
     Route::delete('/garden/{gardenImage}', [GardenImageController::class, 'destroy'])->name('garden.destroy');
 
-    Route::get('/extras', [ExtraController::class, 'index'])->name('extras.index');
     Route::post('/extras', [ExtraController::class, 'store'])->name('extras.store');
     Route::put('/extras/{extra}', [ExtraController::class, 'update'])->name('extras.update');
     Route::delete('/extras/{extra}', [ExtraController::class, 'destroy'])->name('extras.destroy');

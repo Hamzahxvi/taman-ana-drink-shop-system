@@ -12,10 +12,20 @@ import {
 } from '@/components/ui/select';
 import type { Product } from '@/types';
 
+interface ExtraData {
+    id: number;
+    name: string;
+    slug: string;
+    price: number;
+    is_active: boolean;
+}
+
 export default function AdminProductForm({
     product,
+    extras = [],
 }: {
     product?: Product | null;
+    extras?: ExtraData[];
 }) {
     const { errors } = usePage().props;
     const isEditing = !!product;
@@ -27,6 +37,7 @@ export default function AdminProductForm({
         icon: product?.icon ?? '',
         category: product?.category ?? '',
         is_available: product?.is_available ?? true,
+        extra_ids: product?.extra_ids ?? [] as number[],
     });
 
     const [image, setImage] = useState<File | null>(null);
@@ -40,6 +51,10 @@ export default function AdminProductForm({
         data.append('icon', form.icon);
         data.append('category', form.category);
         data.append('is_available', form.is_available ? '1' : '0');
+
+        for (const id of form.extra_ids) {
+            data.append('extra_ids[]', String(id));
+        }
 
         if (image) {
             data.append('image', image);
@@ -205,6 +220,55 @@ export default function AdminProductForm({
                                     {form.is_available ? 'Yes' : 'No'}
                                 </span>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-zinc-300">Extras</Label>
+                        <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
+                            <div className="grid gap-2 sm:grid-cols-2">
+                                {extras.map((extra) => (
+                                    <label
+                                        key={extra.id}
+                                        className="flex cursor-pointer items-center gap-3 rounded-lg p-2 text-sm transition hover:bg-zinc-800/50"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={form.extra_ids.includes(
+                                                extra.id,
+                                            )}
+                                            onChange={(e) => {
+                                                setForm({
+                                                    ...form,
+                                                    extra_ids: e.target
+                                                        .checked
+                                                        ? [
+                                                                ...form.extra_ids,
+                                                                extra.id,
+                                                            ]
+                                                        : form.extra_ids.filter(
+                                                                (id) =>
+                                                                    id !==
+                                                                    extra.id,
+                                                            ),
+                                                });
+                                            }}
+                                            className="h-4 w-4 rounded border-zinc-600 bg-zinc-800 text-amber-500 focus:ring-amber-500"
+                                        />
+                                        <span className="text-zinc-200">
+                                            {extra.name}
+                                        </span>
+                                        <span className="ml-auto text-xs text-zinc-500">
+                                            +RM {extra.price.toFixed(2)}
+                                        </span>
+                                    </label>
+                                ))}
+                            </div>
+                            {extras.length === 0 && (
+                                <p className="py-2 text-center text-sm text-zinc-500">
+                                    No extras available.
+                                </p>
+                            )}
                         </div>
                     </div>
 

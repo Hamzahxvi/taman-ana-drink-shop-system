@@ -3,21 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ExtraResource;
 use App\Models\Extra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 
 class ExtraController extends Controller
 {
-    public function index()
-    {
-        return Inertia::render('admin/extras/index', [
-            'extras' => ExtraResource::collection(Extra::orderBy('name')->get())->resolve(),
-        ]);
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -32,7 +23,7 @@ class ExtraController extends Controller
             'is_active' => true,
         ]);
 
-        return redirect()->route('admin.extras.index')
+        return redirect()->route('admin.products.index')
             ->with('flash', ['success' => 'Extra added.']);
     }
 
@@ -51,7 +42,7 @@ class ExtraController extends Controller
             'is_active' => $validated['is_active'] ?? $extra->is_active,
         ]);
 
-        return redirect()->route('admin.extras.index')
+        return redirect()->route('admin.products.index')
             ->with('flash', ['success' => 'Extra updated.']);
     }
 
@@ -59,7 +50,7 @@ class ExtraController extends Controller
     {
         $extra->delete();
 
-        return redirect()->route('admin.extras.index')
+        return redirect()->route('admin.products.index')
             ->with('flash', ['success' => 'Extra deleted.']);
     }
 }

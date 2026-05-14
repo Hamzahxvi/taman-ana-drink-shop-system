@@ -9,7 +9,7 @@ class ProductResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
@@ -20,5 +20,11 @@ class ProductResource extends JsonResource
             'category' => $this->category,
             'is_available' => $this->is_available,
         ];
+
+        if ($this->relationLoaded('extras')) {
+            $data['extra_ids'] = $this->extras->pluck('id')->toArray();
+        }
+
+        return $data;
     }
 }

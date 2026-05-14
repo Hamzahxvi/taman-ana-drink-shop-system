@@ -6,6 +6,7 @@ use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 #[Fillable(['name', 'slug', 'description', 'price', 'icon', 'image', 'category', 'is_available'])]
@@ -29,5 +30,10 @@ class Product extends Model
                 $product->slug = Str::slug($product->name);
             }
         });
+    }
+
+    public function extras(): BelongsToMany
+    {
+        return $this->belongsToMany(Extra::class, 'product_extras');
     }
 }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ExtraResource;
 use App\Http\Resources\ProductResource;
+use App\Models\Extra;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -17,9 +19,11 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('created_at', 'desc')->get();
+        $extras = Extra::orderBy('name')->get();
 
         return Inertia::render('admin/products/index', [
             'products' => ProductResource::collection($products)->resolve(),
+            'extras' => ExtraResource::collection($extras)->resolve(),
         ]);
     }
 
@@ -27,6 +31,7 @@ class ProductController extends Controller
     {
         return Inertia::render('admin/products/form', [
             'product' => null,
+            'extras' => ExtraResource::collection(Extra::orderBy('name')->get())->resolve(),
         ]);
     }
 
@@ -39,7 +44,8 @@ class ProductController extends Controller
             $data['image'] = $request->file('image')->store('products', 'public');
         }
 
-        Product::create($data);
+        $product = Product::create($data);
+        $product->extras()->sync($request->input('extra_ids', []));
 
         return redirect()->route('admin.products.index')
             ->with('flash', ['success' => 'Product created successfully.']);
@@ -47,8 +53,11 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $product->load('extras');
+
         return Inertia::render('admin/products/form', [
             'product' => (new ProductResource($product))->resolve(),
+            'extras' => ExtraResource::collection(Extra::orderBy('name')->get())->resolve(),
         ]);
     }
 
@@ -68,6 +77,7 @@ class ProductController extends Controller
         }
 
         $product->update($data);
+        $product->extras()->sync($request->input('extra_ids', []));
 
         return redirect()->route('admin.products.index')
             ->with('flash', ['success' => 'Product updated successfully.']);

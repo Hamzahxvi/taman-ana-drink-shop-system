@@ -156,21 +156,6 @@ export default function AdminDashboard({
                         </Link>
 
                         <Link
-                            href="/admin/extras"
-                            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
-                        >
-                            <div>
-                                <h3 className="font-semibold text-zinc-100">
-                                    Manage Extras
-                                </h3>
-                                <p className="text-sm text-zinc-400">
-                                    Add-ons & toppings
-                                </p>
-                            </div>
-                            <span className="text-2xl">✨</span>
-                        </Link>
-
-                        <Link
                             href="/admin/garden"
                             className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
                         >

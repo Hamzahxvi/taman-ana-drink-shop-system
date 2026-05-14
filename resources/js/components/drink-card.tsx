@@ -22,6 +22,10 @@ export function DrinkCard({
     const { addItem } = useCart();
     const [dialogOpen, setDialogOpen] = useState(false);
 
+    const productExtras = extras.filter(
+        (e) => product.extra_ids?.includes(e.id) ?? true,
+    );
+
     return (
         <>
             <div className="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5">
@@ -58,7 +62,7 @@ export function DrinkCard({
 
             <DrinkCustomizationDialog
                 product={product}
-                extras={extras}
+                extras={productExtras}
                 open={dialogOpen}
                 onClose={() => setDialogOpen(false)}
                 onAdd={(options) => addItem(product, options)}
