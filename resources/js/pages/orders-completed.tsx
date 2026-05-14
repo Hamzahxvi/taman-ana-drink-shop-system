@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { CheckCircle, Clock, CookingPot, MapPin } from 'lucide-react';
+import { CheckCircle, Clock, CookingPot, FileText, MapPin } from 'lucide-react';
 import { dashboard } from '@/routes';
 import type { Order } from '@/types';
 
@@ -40,31 +40,27 @@ const toppingLabels: Record<string, string> = {
     whipping_cream: 'Whipping Cream',
 };
 
-export default function Orders({ orders }: { orders: Order[] }) {
+export default function OrdersCompleted({ orders }: { orders: Order[] }) {
     return (
         <>
-            <Head title="My Orders" />
+            <Head title="Completed Orders" />
 
             <div className="p-6">
                 <div className="mb-6 flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-zinc-100">
-                        My Orders
+                        Completed Orders
                     </h1>
                     <Link
-                        href="/orders/completed"
+                        href="/orders"
                         className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 px-3 py-1.5 text-sm text-zinc-400 transition hover:border-zinc-500 hover:text-zinc-200"
                     >
-                        <CheckCircle className="h-4 w-4" />
-                        View Completed
+                        ← In Progress
                     </Link>
                 </div>
 
                 {orders.length === 0 ? (
                     <div className="py-12 text-center text-zinc-500">
-                        <p className="text-lg">No orders in progress</p>
-                        <p className="mt-1 text-sm">
-                            Your active orders will appear here
-                        </p>
+                        <p className="text-lg">No completed orders</p>
                     </div>
                 ) : (
                     <div className="space-y-4">
@@ -78,7 +74,7 @@ export default function Orders({ orders }: { orders: Order[] }) {
                             return (
                                 <div
                                     key={order.id}
-                                    className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5"
+                                    className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 opacity-75"
                                 >
                                     <div className="mb-3 flex items-start justify-between">
                                         <div>
@@ -87,18 +83,17 @@ export default function Orders({ orders }: { orders: Order[] }) {
                                                     Order #{order.id}
                                                 </span>
                                                 <span
-                                                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyle}`}
+                                                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-500/10 text-green-400`}
                                                 >
-                                                    <StatusIcon className="h-3 w-3" />
-                                                    {statusConfig[order.status]
-                                                        ?.label ?? order.status}
+                                                    <CheckCircle className="h-3 w-3" />
+                                                    Completed
                                                 </span>
                                                 <span className="inline-flex items-center gap-1 text-xs text-zinc-500">
                                                     <MapPin className="h-3 w-3" />
                                                     <span className="capitalize">
                                                         {order.order_type ===
                                                         'delivery'
-                                                            ? `Delivery`
+                                                            ? 'Delivery'
                                                             : 'Pickup'}
                                                     </span>
                                                 </span>
@@ -203,6 +198,14 @@ export default function Orders({ orders }: { orders: Order[] }) {
                                             Notes: {order.notes}
                                         </p>
                                     )}
+
+                                    <a
+                                        href={`/orders/${order.id}/receipt`}
+                                        className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400 transition hover:border-amber-500/50 hover:text-amber-400"
+                                    >
+                                        <FileText className="h-3.5 w-3.5" />
+                                        Print Receipt
+                                    </a>
                                 </div>
                             );
                         })}
@@ -213,9 +216,10 @@ export default function Orders({ orders }: { orders: Order[] }) {
     );
 }
 
-Orders.layout = {
+OrdersCompleted.layout = {
     breadcrumbs: [
         { title: 'Dashboard', href: dashboard() },
-        { title: 'Orders', href: '' },
+        { title: 'Orders', href: '/orders' },
+        { title: 'Completed', href: '' },
     ],
 };

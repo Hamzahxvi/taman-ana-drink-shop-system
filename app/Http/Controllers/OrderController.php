@@ -121,10 +121,24 @@ class OrderController extends Controller
     {
         $orders = Order::with('items')
             ->where('user_id', $request->user()->id)
+            ->whereIn('status', ['pending', 'in-progress'])
             ->orderBy('created_at', 'desc')
             ->get();
 
         return Inertia::render('orders', [
+            'orders' => OrderResource::collection($orders)->resolve(),
+        ]);
+    }
+
+    public function completedOrders(Request $request)
+    {
+        $orders = Order::with('items')
+            ->where('user_id', $request->user()->id)
+            ->where('status', 'completed')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return Inertia::render('orders-completed', [
             'orders' => OrderResource::collection($orders)->resolve(),
         ]);
     }

@@ -19,6 +19,7 @@ Route::inertia('past-orders', 'past-orders')->name('past-orders');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/orders', [OrderController::class, 'history'])->name('orders.history');
+    Route::get('/orders/completed', [OrderController::class, 'completedOrders'])->name('orders.completed');
     Route::get('dashboard', [WelcomeController::class, 'dashboard'])->name('dashboard');
 });
 
