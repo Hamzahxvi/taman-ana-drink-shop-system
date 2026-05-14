@@ -18,7 +18,25 @@ Route::get('/build/{path}', function ($path) {
         abort(404);
     }
 
-    return response()->file($file);
+    $contentTypes = [
+        'css' => 'text/css',
+        'gif' => 'image/gif',
+        'ico' => 'image/x-icon',
+        'jpg' => 'image/jpeg',
+        'js' => 'application/javascript',
+        'json' => 'application/json',
+        'png' => 'image/png',
+        'svg' => 'image/svg+xml',
+        'wasm' => 'application/wasm',
+        'woff' => 'font/woff',
+        'woff2' => 'font/woff2',
+    ];
+
+    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+
+    return response()->file($file, [
+        'Content-Type' => $contentTypes[$extension] ?? 'application/octet-stream',
+    ]);
 })->where('path', '.*');
 
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
