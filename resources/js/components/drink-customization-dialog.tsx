@@ -1,16 +1,25 @@
-import { Flame, Snowflake, Droplets, Cookie, Cake } from 'lucide-react';
-import { useState } from 'react';
+import { Flame, Snowflake, Plus } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import type { AddItemOptions } from '@/contexts/cart-context';
 import type { Product } from '@/types';
 
+interface ExtraData {
+    id: number;
+    name: string;
+    slug: string;
+    price: number;
+    is_active: boolean;
+}
+
 type Temperature = 'hot' | 'cold';
 type Sweetness = 'regular' | 'less' | 'none';
 
 interface DrinkCustomizationDialogProps {
     product: Product;
+    extras?: ExtraData[];
     open: boolean;
     onClose: () => void;
     onAdd: (options: AddItemOptions) => void;
@@ -18,52 +27,72 @@ interface DrinkCustomizationDialogProps {
 
 const TEA_SLUGS = ['tea', 'green-tea'];
 
+const iconMap: Record<string, string> = {
+    'extra-milk': '🥛',
+    'oreo-crumbles': '🍪',
+    'whipping-cream': '🍦',
+};
+
 export function DrinkCustomizationDialog({
     product,
+    extras = [],
     open,
     onClose,
     onAdd,
 }: DrinkCustomizationDialogProps) {
     const [temperature, setTemperature] = useState<Temperature>('hot');
     const [sweetness, setSweetness] = useState<Sweetness>('regular');
-    const [extraMilk, setExtraMilk] = useState(false);
-    const [toppings, setToppings] = useState<string[]>([]);
+    const [selectedExtras, setSelectedExtras] = useState<Set<string>>(
+        new Set(),
+    );
     const [remark, setRemark] = useState('');
 
     const isPlainTea = TEA_SLUGS.includes(product.slug);
+    const activeExtras = extras.filter((e) => e.is_active);
+
+    const toggleExtra = (slug: string) => {
+        setSelectedExtras((prev) => {
+            const next = new Set(prev);
+
+            if (next.has(slug)) {
+                next.delete(slug);
+            } else {
+                next.add(slug);
+            }
+
+            return next;
+        });
+    };
+
+    const unitPrice = useMemo(() => {
+        let price = product.price;
+
+        for (const slug of selectedExtras) {
+            const extra = activeExtras.find((e) => e.slug === slug);
+
+            if (extra) {
+                price += extra.price;
+            }
+        }
+
+        return price;
+    }, [product.price, selectedExtras, activeExtras]);
 
     if (!open) {
         return null;
     }
 
-    const toggleTopping = (value: string) => {
-        setToppings((prev) =>
-            prev.includes(value)
-                ? prev.filter((t) => t !== value)
-                : [...prev, value],
-        );
-    };
-
-    let unitPrice = product.price;
-
-    if (extraMilk) {
-        unitPrice += 0.5;
-    }
-
-    if (toppings.includes('oreo_crumbles')) {
-        unitPrice += 0.5;
-    }
-
-    if (toppings.includes('whipping_cream')) {
-        unitPrice += 0.5;
-    }
-
     const handleAdd = () => {
+        const extraMilk = selectedExtras.has('extra-milk');
+        const toppingSlugs = Array.from(selectedExtras).filter(
+            (s) => s !== 'extra-milk',
+        );
+
         onAdd({
             temperature,
             sweetness,
             extraMilk: isPlainTea ? false : extraMilk,
-            toppings: isPlainTea ? [] : toppings,
+            toppings: isPlainTea ? [] : toppingSlugs,
             remark,
         });
         onClose();
@@ -149,94 +178,44 @@ export function DrinkCustomizationDialog({
                         </div>
                     </div>
 
-                    {!isPlainTea && (
-                        <>
-                            <div>
-                                <Label className="mb-3 block text-sm font-medium text-zinc-300">
-                                    Extras
-                                </Label>
-                                <div className="space-y-3">
-                                    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-3 transition-all hover:border-zinc-700">
+                    {!isPlainTea && activeExtras.length > 0 && (
+                        <div>
+                            <Label className="mb-3 block text-sm font-medium text-zinc-300">
+                                Extras
+                            </Label>
+                            <div className="space-y-3">
+                                {activeExtras.map((extra) => (
+                                    <label
+                                        key={extra.slug}
+                                        className="flex cursor-pointer items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-3 transition-all hover:border-zinc-700"
+                                    >
                                         <div className="flex items-center gap-3">
-                                            <Droplets className="h-5 w-5 text-blue-400" />
+                                            <span className="text-xl">
+                                                {iconMap[extra.slug] ||
+                                                    '+'}
+                                            </span>
                                             <span className="text-sm text-zinc-200">
-                                                Extra Milk
+                                                {extra.name}
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-3">
                                             <span className="text-xs text-amber-400">
-                                                +RM0.50
+                                                +RM{extra.price.toFixed(2)}
                                             </span>
                                             <Checkbox
-                                                checked={extraMilk}
-                                                onCheckedChange={(checked) =>
-                                                    setExtraMilk(
-                                                        checked === true,
-                                                    )
-                                                }
-                                                className="border-zinc-600"
-                                            />
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div>
-                                <Label className="mb-3 block text-sm font-medium text-zinc-300">
-                                    Toppings
-                                </Label>
-                                <div className="space-y-3">
-                                    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-3 transition-all hover:border-zinc-700">
-                                        <div className="flex items-center gap-3">
-                                            <Cookie className="h-5 w-5 text-amber-400" />
-                                            <span className="text-sm text-zinc-200">
-                                                Oreo Crumbles
-                                            </span>
-                                        </div>
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-xs text-amber-400">
-                                                +RM0.50
-                                            </span>
-                                            <Checkbox
-                                                checked={toppings.includes(
-                                                    'oreo_crumbles',
+                                                checked={selectedExtras.has(
+                                                    extra.slug,
                                                 )}
                                                 onCheckedChange={() =>
-                                                    toggleTopping(
-                                                        'oreo_crumbles',
-                                                    )
+                                                    toggleExtra(extra.slug)
                                                 }
                                                 className="border-zinc-600"
                                             />
                                         </div>
                                     </label>
-                                    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-3 transition-all hover:border-zinc-700">
-                                        <div className="flex items-center gap-3">
-                                            <Cake className="h-5 w-5 text-purple-400" />
-                                            <span className="text-sm text-zinc-200">
-                                                Whipping Cream
-                                            </span>
-                                        </div>
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-xs text-amber-400">
-                                                +RM0.50
-                                            </span>
-                                            <Checkbox
-                                                checked={toppings.includes(
-                                                    'whipping_cream',
-                                                )}
-                                                onCheckedChange={() =>
-                                                    toggleTopping(
-                                                        'whipping_cream',
-                                                    )
-                                                }
-                                                className="border-zinc-600"
-                                            />
-                                        </div>
-                                    </label>
-                                </div>
+                                ))}
                             </div>
-                        </>
+                        </div>
                     )}
 
                     <div>

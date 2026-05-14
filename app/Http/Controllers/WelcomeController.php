@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ExtraResource;
 use App\Http\Resources\GardenImageResource;
 use App\Http\Resources\ProductResource;
+use App\Models\Extra;
 use App\Models\GardenImage;
 use App\Models\Product;
 use Inertia\Inertia;
@@ -22,6 +24,7 @@ class WelcomeController extends Controller
             'canRegister' => Features::enabled(Features::registration()),
             'products' => ProductResource::collection($products)->resolve(),
             'gardenImages' => GardenImageResource::collection($gardenImages)->resolve(),
+            'extras' => ExtraResource::collection(Extra::where('is_active', true)->orderBy('name')->get())->resolve(),
         ]);
     }
 
@@ -35,6 +38,7 @@ class WelcomeController extends Controller
         return Inertia::render('dashboard', [
             'products' => ProductResource::collection($products)->resolve(),
             'gardenImages' => GardenImageResource::collection($gardenImages)->resolve(),
+            'extras' => ExtraResource::collection(Extra::where('is_active', true)->orderBy('name')->get())->resolve(),
         ]);
     }
 }

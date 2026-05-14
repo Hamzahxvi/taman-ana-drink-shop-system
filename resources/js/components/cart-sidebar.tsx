@@ -21,6 +21,7 @@ const sweetnessLabels: Record<string, string> = {
 };
 
 const toppingLabels: Record<string, string> = {
+    extra_milk: 'Extra Milk',
     oreo_crumbles: 'Oreo Crumbles',
     whipping_cream: 'Whipping Cream',
 };
@@ -547,28 +548,40 @@ export function CartSidebar() {
                                                                         ]
                                                                     }
                                                                 </span>
-                                                                {item.extraMilk && (
-                                                                    <span className="inline-flex items-center gap-0.5 rounded-full bg-blue-500/10 px-2 py-0.5 text-xs text-blue-400">
-                                                                        <Droplets className="h-2.5 w-2.5" />
-                                                                        Extra
-                                                                        Milk
-                                                                    </span>
-                                                                )}
-                                                                {item.toppings.map(
-                                                                    (t) => (
-                                                                        <span
-                                                                            key={
-                                                                                t
-                                                                            }
-                                                                            className="inline-flex items-center rounded-full bg-purple-500/10 px-2 py-0.5 text-xs text-purple-400"
-                                                                        >
-                                                                            {toppingLabels[
-                                                                                t
-                                                                            ] ??
-                                                                                t}
-                                                                        </span>
-                                                                    ),
-                                                                )}
+                                                                {(() => {
+                                                                    const allExtras: string[] =
+                                                                        [];
+
+                                                                    if (
+                                                                        item.extraMilk
+                                                                    ) {
+                                                                        allExtras.push(
+                                                                            'extra_milk',
+                                                                        );
+                                                                    }
+
+                                                                    allExtras.push(
+                                                                        ...item.toppings,
+                                                                    );
+
+                                                                    return allExtras.map(
+                                                                        (
+                                                                            slug,
+                                                                        ) => (
+                                                                            <span
+                                                                                key={
+                                                                                    slug
+                                                                                }
+                                                                                className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400"
+                                                                            >
+                                                                                {toppingLabels[
+                                                                                    slug
+                                                                                ] ??
+                                                                                    slug}
+                                                                            </span>
+                                                                        ),
+                                                                    );
+                                                                })()}
                                                             </div>
                                                             {item.remark && (
                                                                 <p className="mt-1 text-xs text-zinc-500">

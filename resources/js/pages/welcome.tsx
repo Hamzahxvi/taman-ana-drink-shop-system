@@ -10,9 +10,17 @@ import type { GardenImage, Product } from '@/types';
 export default function Welcome({
     products = [],
     gardenImages = [],
+    extras = [],
 }: {
     products?: Product[];
     gardenImages?: GardenImage[];
+    extras?: Array<{
+        id: number;
+        name: string;
+        slug: string;
+        price: number;
+        is_active: boolean;
+    }>;
 }) {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
     const hasPastOrder =
@@ -42,7 +50,7 @@ export default function Welcome({
 
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {products.map((product) => (
-                                <DrinkCard key={product.id} product={product} />
+                                <DrinkCard key={product.id} product={product} extras={extras} />
                             ))}
                         </div>
                     </div>

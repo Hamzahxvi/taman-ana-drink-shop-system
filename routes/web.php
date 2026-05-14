@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExtraController;
 use App\Http\Controllers\Admin\GardenImageController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\OrderController;
@@ -38,6 +39,11 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::post('/garden', [GardenImageController::class, 'store'])->name('garden.store');
     Route::post('/garden/{gardenImage}', [GardenImageController::class, 'update'])->name('garden.update');
     Route::delete('/garden/{gardenImage}', [GardenImageController::class, 'destroy'])->name('garden.destroy');
+
+    Route::get('/extras', [ExtraController::class, 'index'])->name('extras.index');
+    Route::post('/extras', [ExtraController::class, 'store'])->name('extras.store');
+    Route::put('/extras/{extra}', [ExtraController::class, 'update'])->name('extras.update');
+    Route::delete('/extras/{extra}', [ExtraController::class, 'destroy'])->name('extras.destroy');
 });
 
 require __DIR__.'/settings.php';

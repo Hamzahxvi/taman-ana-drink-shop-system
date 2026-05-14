@@ -4,7 +4,21 @@ import { DrinkCustomizationDialog } from '@/components/drink-customization-dialo
 import { useCart } from '@/contexts/cart-context';
 import type { Product } from '@/types';
 
-export function DrinkCard({ product }: { product: Product }) {
+interface ExtraData {
+    id: number;
+    name: string;
+    slug: string;
+    price: number;
+    is_active: boolean;
+}
+
+export function DrinkCard({
+    product,
+    extras = [],
+}: {
+    product: Product;
+    extras?: ExtraData[];
+}) {
     const { addItem } = useCart();
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -44,6 +58,7 @@ export function DrinkCard({ product }: { product: Product }) {
 
             <DrinkCustomizationDialog
                 product={product}
+                extras={extras}
                 open={dialogOpen}
                 onClose={() => setDialogOpen(false)}
                 onAdd={(options) => addItem(product, options)}
