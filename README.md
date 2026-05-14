@@ -1,6 +1,6 @@
 # Taman Ana — Garden Drink Shop System
 
-A full-stack drink ordering system for **Taman Ana**, a garden-themed beverage shop in Bukit Changgang, Banting, Selangor. Built for a seamless guest-first ordering experience with in-store pickup, local delivery, and real-time order tracking.
+A full-stack drink ordering system for **Taman Ana**, a garden-themed beverage shop in Bukit Changgang, Banting, Selangor.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?logo=laravel" alt="Laravel">
@@ -18,26 +18,22 @@ A full-stack drink ordering system for **Taman Ana**, a garden-themed beverage s
 ### Customer Ordering Flow
 - **Guest-first design** — No account required to order
 - **Self Pickup or Delivery** — Delivery available for Bukit Changgang, Labohan Dagang, Olak Lempit, RTB
-- **Full drink customization** — Hot/Cold, sweetness level, extra milk (+RM0.50), oreo crumbles (+RM0.50), whipping cream (+RM0.50), special remarks per item
+- **Full drink customization** — Hot/Cold, sweetness level, extras (admin-managed add-ons), special remarks
 - **Smart cart** — Identical drink configurations are grouped, different variants stay separate
-- **Order type & payment** — Choose pickup/delivery, pay via Online Banking/DuitNow or Cash
-- **One-tap order tracking** — After ordering, a persistent "My Orders" button appears showing active & past orders
+- **One-tap order tracking** — Real-time order status updates via public tracking page
 - **PDF receipt** — Downloadable receipt for every order
 
 ### Registered Customers
 - **Account with phone number** — Registration captures name, email, phone, password
-- **Auto-fill checkout** — Name and phone pre-filled from account; toggle to use registered or different phone
-- **Order history** — All past orders with status badges and full item breakdowns
+- **Order history** — In-progress and completed orders with status badges and full item breakdowns
+- **Print receipts** — Download PDF receipts for completed orders
 
 ### Admin Panel (`/admin`)
-- **Dashboard** — Daily stats, popular items, revenue
-- **Menu management** — Add/edit/delete products with emoji icons, categories, images
-- **Order management** — View all orders with full customization details, update status (Pending → Preparing → Completed)
+- **Dashboard** — Daily stats, popular items, revenue overview
+- **Order management** — View in-progress orders, update status (Pending → In Progress → Completed), separate completed orders page
+- **Menu management** — Add/edit/delete products with emoji icons, categories, images, and per-product extras
+- **Extras management** — Manage add-ons (Extra Milk, Oreo Crumbles, Whipping Cream) with pricing — integrated into the menu page
 - **Garden gallery** — Upload and manage garden images with captions
-
-### Order Tracking
-- **Public tracking page** — `/orders/{id}/track` shows real-time status, all item details, PDF download
-- **My Orders page** — `/past-orders` auto-looks up orders by saved phone number, split into Active & Past sections
 
 ---
 
@@ -45,13 +41,13 @@ A full-stack drink ordering system for **Taman Ana**, a garden-themed beverage s
 
 | Layer | Technology |
 |---|---|
-| Backend | Laravel 13, PHP 8.3+ |
-| Auth | Laravel Fortify (login, register, 2FA, email verification) |
+| Backend | Laravel 13, PHP 8.4+ |
+| Auth | Laravel Fortify (login, register, password reset, email verification, 2FA) |
 | Frontend | React 19, Inertia.js 3, TypeScript |
-| Styling | Tailwind CSS 4, shadcn/ui (Radix primitives) |
-| Database | SQLite (dev), MySQL/PostgreSQL (production) |
+| Styling | Tailwind CSS 4, Radix UI primitives |
+| Database | SQLite (dev), PostgreSQL (production) |
 | PDF | barryvdh/laravel-dompdf |
-| Testing | Pest 4 (40 tests, 136 assertions) |
+| Testing | Pest 4 |
 | Tooling | Vite 8, ESLint, Prettier, Pint |
 
 ---
@@ -70,36 +66,28 @@ Admin panel: `/admin`
 ## Local Development
 
 ### Prerequisites
-- PHP 8.3+
+- PHP 8.4+
 - Composer
 - Node.js 18+
-- SQLite (default) or MySQL
+- SQLite
 
 ### Setup
 
 ```bash
-# Clone
 git clone https://github.com/Hamzahxvi/taman-ana-drink-shop-system.git
 cd taman-ana-drink-shop-system
 
-# Install dependencies
 composer install
 npm install
 
-# Configure environment
 cp .env.example .env
 php artisan key:generate
 
-# Run migrations and seed
 php artisan migrate --seed
-
-# Create storage symlink
 php artisan storage:link
 
-# Build frontend
 npm run build
 
-# Start dev server
 composer dev
 ```
 
@@ -121,81 +109,14 @@ php artisan test      # Run Pest tests
 
 ## Deployment
 
-### Production Checklist
+### Render (Free)
 
-1. **Server requirements**: PHP 8.3+, MySQL 5.7+ / PostgreSQL, Node.js, Composer
-2. **Point web root** to `public/` directory
-3. **Set environment variables** in `.env`:
-   ```env
-   APP_ENV=production
-   APP_DEBUG=false
-   APP_URL=https://your-domain.com
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=taman_ana
-   DB_USERNAME=your_user
-   DB_PASSWORD=your_password
-   SESSION_DRIVER=database
-   CACHE_STORE=database
-   QUEUE_CONNECTION=database
-   ```
-4. **Deploy commands**:
-   ```bash
-   composer install --no-dev --optimize-autoloader
-   npm ci
-   npm run build
-   php artisan migrate --seed --force
-   php artisan storage:link
-   php artisan config:cache
-   php artisan route:cache
-   php artisan view:cache
-   ```
-5. **SSL**: Configure Let's Encrypt or Cloudflare for HTTPS
-6. **Queue worker**: Run `php artisan queue:work` as a daemon for background jobs
-7. **Scheduler**: Add `* * * * * php /path/to/artisan schedule:run` to cron
-
-### Deploy to Laravel Forge (Recommended)
-
-[Laravel Forge](https://forge.laravel.com) handles server provisioning, deployment, SSL, queues, and scheduling automatically. Connect your GitHub repo, add `.env` values, and deploy with one click.
-
-### Deploy to Shared Hosting (cPanel)
-
-1. Upload all files to your hosting
-2. Set `public/` as the document root (or create a symlink)
-3. Update `.env` with hosting database credentials
-4. Run deployment commands via SSH or cron
-
----
-
-## Project Structure
-
-```
-taman-ana/
-├── app/
-│   ├── Actions/Fortify/        # Auth actions (CreateNewUser, ResetPassword)
-│   ├── Http/
-│   │   ├── Controllers/        # OrderController, WelcomeController, Admin controllers
-│   │   ├── Middleware/          # HandleInertiaRequests, AdminMiddleware
-│   │   ├── Requests/           # Form request validation
-│   │   └── Resources/          # API resource transformers
-│   └── Models/                 # User, Product, Order, OrderItem, GardenImage
-├── database/
-│   ├── migrations/             # Database schema
-│   └── seeders/                # Default data (admin, products, garden images)
-├── resources/
-│   ├── js/
-│   │   ├── components/         # React components (cart, drink cards, hero)
-│   │   ├── contexts/           # CartContext with variant-aware cart
-│   │   ├── layouts/            # Page layouts (app, auth, settings)
-│   │   ├── pages/              # Inertia page components
-│   │   └── types/              # TypeScript type definitions
-│   └── views/                  # Blade templates (app, receipt)
-├── routes/
-│   ├── web.php                 # Public + auth + admin routes
-│   └── settings.php            # Profile & security routes
-└── tests/                      # Pest tests
-```
+1. Push to GitHub
+2. Go to [dashboard.render.com](https://dashboard.render.com) → New → Blueprint
+3. Connect your repo — Render reads `render.yaml` and auto-creates:
+   - Web Service (Docker, PHP 8.4 + Apache)
+   - PostgreSQL database (free tier)
+4. Click Apply — first deploy takes ~5 minutes
 
 ---
 
@@ -208,12 +129,15 @@ taman-ana/
 | GET | `/orders/{id}/track` | Public | Track order status |
 | GET | `/orders/{id}/receipt` | Public | Download PDF receipt |
 | GET | `/past-orders` | Public | My Orders (lookup by phone) |
-| GET | `/orders` | Auth | Order history for logged-in users |
+| GET | `/dashboard` | Auth | Customer dashboard with menu |
+| GET | `/orders` | Auth | In-progress orders |
+| GET | `/orders/completed` | Auth | Completed orders with receipt download |
 | GET | `/login` | Guest | Login page |
 | GET | `/register` | Guest | Registration page |
 | GET | `/admin` | Admin | Admin dashboard |
-| GET | `/admin/products` | Admin | Menu management |
-| GET | `/admin/orders` | Admin | Order management |
+| GET | `/admin/orders` | Admin | In-progress orders |
+| GET | `/admin/orders/completed` | Admin | Completed orders |
+| GET | `/admin/products` | Admin | Menu + extras management |
 | GET | `/admin/garden` | Admin | Garden gallery management |
 
 ---
@@ -221,12 +145,5 @@ taman-ana/
 ## Contact
 
 - **Location**: Lot 12260 Jalan Perak Kanan, Bukit Changgang, 42700 Banting, Selangor
-- **Coordinates**: 2°48'58.6"N 101°38'05.4"E
 - **WhatsApp**: [wa.me/601131791108](https://wa.me/601131791108)
 - **Phone**: +60 11-3179 1108
-
----
-
-## License
-
-This project is proprietary software developed for Taman Ana.
