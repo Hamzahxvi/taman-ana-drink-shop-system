@@ -207,7 +207,7 @@ export default function OrderTrack({ trackOrder }: { trackOrder: Order }) {
                         </a>
                         <br />
                         <a
-                            href="/"
+                            href="/dashboard"
                             className="text-sm text-amber-400 hover:text-amber-300"
                         >
                             &larr; Back to Menu
