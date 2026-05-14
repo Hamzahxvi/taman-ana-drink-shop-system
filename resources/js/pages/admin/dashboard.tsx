@@ -52,7 +52,7 @@ export default function AdminDashboard({
 
             <div className="p-6">
                 <div className="mb-8 flex items-center justify-between">
-                    <h1 className="text-2xl font-bold text-zinc-100">
+                    <h1 className="text-2xl font-bold text-foreground">
                         Admin Dashboard
                     </h1>
                     <button
@@ -66,7 +66,7 @@ export default function AdminDashboard({
                                 },
                             )
                         }
-                        className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
+                        className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground/90 transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
                     >
                         <LogOut className="h-4 w-4" />
                         Logout
@@ -80,7 +80,7 @@ export default function AdminDashboard({
                         return (
                             <div
                                 key={card.label}
-                                className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5"
+                                className="rounded-xl border border-border bg-card p-5"
                             >
                                 <div className="mb-3 flex items-center gap-3">
                                     <div
@@ -88,11 +88,11 @@ export default function AdminDashboard({
                                     >
                                         <Icon className="h-5 w-5" />
                                     </div>
-                                    <span className="text-sm text-zinc-400">
+                                    <span className="text-sm text-muted-foreground">
                                         {card.label}
                                     </span>
                                 </div>
-                                <p className="text-2xl font-bold text-zinc-100">
+                                <p className="text-2xl font-bold text-foreground">
                                     {card.value}
                                 </p>
                             </div>
@@ -101,8 +101,8 @@ export default function AdminDashboard({
                 </div>
 
                 <div className="grid gap-6 lg:grid-cols-2">
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
-                        <h2 className="mb-4 text-lg font-semibold text-zinc-100">
+                    <div className="rounded-xl border border-border bg-card p-5">
+                        <h2 className="mb-4 text-lg font-semibold text-foreground">
                             Popular Items
                         </h2>
                         {Object.keys(popularItems).length > 0 ? (
@@ -114,14 +114,14 @@ export default function AdminDashboard({
                                             className="flex items-center justify-between"
                                         >
                                             <div className="flex items-center gap-3">
-                                                <span className="text-sm text-zinc-500">
+                                                <span className="text-sm text-muted-foreground">
                                                     #{index + 1}
                                                 </span>
-                                                <span className="text-zinc-200">
+                                                <span className="text-foreground/90">
                                                     {name}
                                                 </span>
                                             </div>
-                                            <span className="text-sm text-zinc-400">
+                                            <span className="text-sm text-muted-foreground">
                                                 {count} sold
                                             </span>
                                         </div>
@@ -129,7 +129,7 @@ export default function AdminDashboard({
                                 )}
                             </div>
                         ) : (
-                            <p className="text-sm text-zinc-500">
+                            <p className="text-sm text-muted-foreground">
                                 No orders yet
                             </p>
                         )}
@@ -138,13 +138,13 @@ export default function AdminDashboard({
                     <div className="space-y-4">
                         <Link
                             href="/admin/orders"
-                            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
+                            className="flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-all hover:border-amber-500/50"
                         >
                             <div>
-                                <h3 className="font-semibold text-zinc-100">
+                                <h3 className="font-semibold text-foreground">
                                     View Orders
                                 </h3>
-                                <p className="text-sm text-zinc-400">
+                                <p className="text-sm text-muted-foreground">
                                     Manage incoming orders
                                 </p>
                             </div>
@@ -153,13 +153,13 @@ export default function AdminDashboard({
 
                         <Link
                             href="/admin/products"
-                            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
+                            className="flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-all hover:border-amber-500/50"
                         >
                             <div>
-                                <h3 className="font-semibold text-zinc-100">
+                                <h3 className="font-semibold text-foreground">
                                     Manage Menu
                                 </h3>
-                                <p className="text-sm text-zinc-400">
+                                <p className="text-sm text-muted-foreground">
                                     Add, edit, or remove drink items
                                 </p>
                             </div>
@@ -168,13 +168,13 @@ export default function AdminDashboard({
 
                         <Link
                             href="/admin/garden"
-                            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
+                            className="flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-all hover:border-amber-500/50"
                         >
                             <div>
-                                <h3 className="font-semibold text-zinc-100">
+                                <h3 className="font-semibold text-foreground">
                                     Garden Gallery
                                 </h3>
-                                <p className="text-sm text-zinc-400">
+                                <p className="text-sm text-muted-foreground">
                                     Manage garden photos
                                 </p>
                             </div>

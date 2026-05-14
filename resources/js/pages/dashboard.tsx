@@ -28,7 +28,7 @@ export default function Dashboard({
         <CartProvider>
             <Head title="Dashboard — Taman Ana" />
 
-            <div className="bg-zinc-950 text-zinc-100">
+            <div className="bg-background text-foreground">
                 <section className="relative px-4 pt-12 pb-6">
                     <div className="mx-auto max-w-7xl">
                         <div className="flex items-start justify-between">
@@ -39,14 +39,14 @@ export default function Dashboard({
                                         Signature Menu
                                     </span>
                                 </h1>
-                                <p className="mt-2 text-zinc-400">
+                                <p className="mt-2 text-muted-foreground">
                                     Handcrafted beverages made with love
                                 </p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <a
                                     href="/orders"
-                                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800"
+                                    className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground/90 transition hover:border-ring hover:bg-muted"
                                 >
                                     <ShoppingBag className="h-4 w-4" />
                                     My Orders
@@ -62,7 +62,7 @@ export default function Dashboard({
                                             },
                                         )
                                     }
-                                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
+                                    className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground/90 transition hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
                                 >
                                     <LogOut className="h-4 w-4" />
                                     Logout
@@ -96,7 +96,7 @@ export default function Dashboard({
                                         Garden
                                     </span>
                                 </h2>
-                                <p className="mt-3 text-zinc-400">
+                                <p className="mt-3 text-muted-foreground">
                                     Relax in the serene beauty of Taman Ana
                                 </p>
                             </div>
@@ -108,7 +108,7 @@ export default function Dashboard({
                                         onClick={() => setLightboxIndex(index)}
                                         className="group relative aspect-[4/3] overflow-hidden rounded-xl"
                                     >
-                                        <div className="absolute inset-0 animate-pulse bg-zinc-800" />
+                                        <div className="absolute inset-0 animate-pulse bg-muted" />
                                         <img
                                             src={image.image_url}
                                             alt={
@@ -142,7 +142,7 @@ export default function Dashboard({
                                 <span className="text-amber-400">Contact</span>{' '}
                                 Us
                             </h2>
-                            <p className="mt-3 text-zinc-400">
+                            <p className="mt-3 text-muted-foreground">
                                 We'd love to hear from you
                             </p>
                         </div>
@@ -150,10 +150,10 @@ export default function Dashboard({
                         <div className="grid gap-8 lg:grid-cols-2">
                             <div className="space-y-6">
                                 <div>
-                                    <h3 className="mb-2 text-lg font-semibold text-zinc-100">
+                                    <h3 className="mb-2 text-lg font-semibold text-foreground">
                                         Get in Touch
                                     </h3>
-                                    <p className="text-zinc-400">
+                                    <p className="text-muted-foreground">
                                         Reach out to Puan Ana directly for any
                                         inquiries
                                     </p>
@@ -164,7 +164,7 @@ export default function Dashboard({
                                         href="https://wa.me/601131791108"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-all hover:border-green-500/50 hover:bg-zinc-900"
+                                        className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-all hover:border-green-500/50 hover:bg-card"
                                     >
                                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
                                             <svg
@@ -176,19 +176,19 @@ export default function Dashboard({
                                             </svg>
                                         </div>
                                         <div className="flex-1">
-                                            <p className="font-medium text-zinc-100">
+                                            <p className="font-medium text-foreground">
                                                 WhatsApp
                                             </p>
-                                            <p className="text-sm text-zinc-400">
+                                            <p className="text-sm text-muted-foreground">
                                                 Chat with Puan Ana
                                             </p>
                                         </div>
-                                        <ExternalLink className="h-5 w-5 text-zinc-500" />
+                                        <ExternalLink className="h-5 w-5 text-muted-foreground" />
                                     </a>
 
                                     <a
                                         href="tel:+601131791108"
-                                        className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-all hover:border-blue-500/50 hover:bg-zinc-900"
+                                        className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-all hover:border-blue-500/50 hover:bg-card"
                                     >
                                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
                                             <svg
@@ -200,28 +200,28 @@ export default function Dashboard({
                                             </svg>
                                         </div>
                                         <div className="flex-1">
-                                            <p className="font-medium text-zinc-100">
+                                            <p className="font-medium text-foreground">
                                                 Phone
                                             </p>
-                                            <p className="text-sm text-zinc-400">
+                                            <p className="text-sm text-muted-foreground">
                                                 +60 11-3179 1108
                                             </p>
                                         </div>
-                                        <ExternalLink className="h-5 w-5 text-zinc-500" />
+                                        <ExternalLink className="h-5 w-5 text-muted-foreground" />
                                     </a>
                                 </div>
 
-                                <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
+                                <div className="rounded-xl border border-border bg-card p-4">
                                     <div className="flex items-start gap-3">
                                         <MapPin className="mt-0.5 h-5 w-5 text-amber-400" />
                                         <div>
-                                            <p className="font-medium text-zinc-100">
+                                            <p className="font-medium text-foreground">
                                                 Location
                                             </p>
-                                            <p className="mt-1 text-sm text-zinc-400">
+                                            <p className="mt-1 text-sm text-muted-foreground">
                                                 2°48'58.6"N 101°38'05.4"E
                                             </p>
-                                            <p className="text-sm text-zinc-500">
+                                            <p className="text-sm text-muted-foreground">
                                                 Lot 12260 Jalan Perak Kanan,
                                                 Bukit Changgang, 42700 Banting,
                                                 Selangor.
@@ -240,7 +240,7 @@ export default function Dashboard({
                                 </div>
                             </div>
 
-                            <div className="overflow-hidden rounded-xl border border-zinc-800">
+                            <div className="overflow-hidden rounded-xl border border-border">
                                 <iframe
                                     src="https://maps.google.com/maps?q=2.816278,101.634833&z=17&output=embed"
                                     width="100%"
@@ -257,13 +257,13 @@ export default function Dashboard({
                     </div>
                 </section>
 
-                <footer className="border-t border-zinc-800 px-4 py-8">
+                <footer className="border-t border-border px-4 py-8">
                     <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
-                        <p className="text-sm text-zinc-500">
+                        <p className="text-sm text-muted-foreground">
                             &copy; {new Date().getFullYear()} Taman Ana. All
                             rights reserved.
                         </p>
-                        <div className="flex items-center gap-4 text-sm text-zinc-500">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <span>Made with love in Banting</span>
                         </div>
                     </div>
@@ -298,7 +298,7 @@ export default function Dashboard({
                             }}
                         />
                         {gardenImages[lightboxIndex].caption && (
-                            <p className="mt-4 text-center text-sm text-zinc-300">
+                            <p className="mt-4 text-center text-sm text-foreground/80">
                                 {gardenImages[lightboxIndex].caption}
                             </p>
                         )}
@@ -315,7 +315,7 @@ export default function Dashboard({
                                 className={`h-2 w-2 rounded-full transition-all ${
                                     index === lightboxIndex
                                         ? 'w-6 bg-amber-400'
-                                        : 'bg-zinc-600 hover:bg-zinc-400'
+                                        : 'bg-muted-foreground hover:bg-foreground/60'
                                 }`}
                             />
                         ))}

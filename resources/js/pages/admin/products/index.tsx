@@ -89,14 +89,14 @@ export default function AdminProductsIndex({
             <div className="p-6">
                 <Link
                     href="/admin"
-                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition hover:text-zinc-200"
+                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition hover:text-foreground/90"
                 >
                     <ArrowLeft className="h-4 w-4" />
                     Back
                 </Link>
 
                 <div className="mb-6 flex items-center justify-between">
-                    <h1 className="text-2xl font-bold text-zinc-100">
+                    <h1 className="text-2xl font-bold text-foreground">
                         Menu Items
                     </h1>
                     <Link
@@ -108,26 +108,26 @@ export default function AdminProductsIndex({
                     </Link>
                 </div>
 
-                <div className="mb-10 overflow-hidden rounded-xl border border-zinc-800">
+                <div className="mb-10 overflow-hidden rounded-xl border border-border">
                     <table className="w-full">
                         <thead>
-                            <tr className="border-b border-zinc-800 bg-zinc-900/50">
-                                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                            <tr className="border-b border-border bg-card">
+                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
                                     Icon
                                 </th>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
                                     Name
                                 </th>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
                                     Category
                                 </th>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
                                     Price
                                 </th>
-                                <th className="px-4 py-3 text-left text-sm font-medium text-zinc-400">
+                                <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">
                                     Available
                                 </th>
-                                <th className="px-4 py-3 text-right text-sm font-medium text-zinc-400">
+                                <th className="px-4 py-3 text-right text-sm font-medium text-muted-foreground">
                                     Actions
                                 </th>
                             </tr>
@@ -136,15 +136,15 @@ export default function AdminProductsIndex({
                             {products.map((product) => (
                                 <tr
                                     key={product.id}
-                                    className="border-b border-zinc-800 last:border-0 hover:bg-zinc-900/30"
+                                    className="border-b border-border last:border-0 hover:bg-muted/50"
                                 >
                                     <td className="px-4 py-3 text-2xl">
                                         {product.icon}
                                     </td>
-                                    <td className="px-4 py-3 font-medium text-zinc-100">
+                                    <td className="px-4 py-3 font-medium text-foreground">
                                         {product.name}
                                     </td>
-                                    <td className="px-4 py-3 text-sm text-zinc-400">
+                                    <td className="px-4 py-3 text-sm text-muted-foreground">
                                         {product.category}
                                     </td>
                                     <td className="px-4 py-3 text-amber-400">
@@ -167,7 +167,7 @@ export default function AdminProductsIndex({
                                         <div className="flex items-center justify-end gap-2">
                                             <Link
                                                 href={`/admin/products/${product.id}/edit`}
-                                                className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
+                                                className="rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
                                             >
                                                 <Pencil className="h-4 w-4" />
                                             </Link>
@@ -175,7 +175,7 @@ export default function AdminProductsIndex({
                                                 onClick={() =>
                                                     handleDeleteProduct(product)
                                                 }
-                                                className="rounded-lg p-2 text-zinc-400 hover:bg-red-500/10 hover:text-red-400"
+                                                className="rounded-lg p-2 text-muted-foreground hover:bg-red-500/10 hover:text-red-400"
                                             >
                                                 <Trash2 className="h-4 w-4" />
                                             </button>
@@ -187,7 +187,7 @@ export default function AdminProductsIndex({
                                 <tr>
                                     <td
                                         colSpan={6}
-                                        className="px-4 py-8 text-center text-sm text-zinc-500"
+                                        className="px-4 py-8 text-center text-sm text-muted-foreground"
                                     >
                                         No menu items yet.
                                     </td>
@@ -198,7 +198,9 @@ export default function AdminProductsIndex({
                 </div>
 
                 <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-xl font-bold text-zinc-100">Extras</h2>
+                    <h2 className="text-xl font-bold text-foreground">
+                        Extras
+                    </h2>
                     <button
                         onClick={() => {
                             resetExtraForm();
@@ -214,14 +216,14 @@ export default function AdminProductsIndex({
                 {showExtraForm && (
                     <form
                         onSubmit={handleExtraSubmit}
-                        className="mb-6 rounded-xl border border-zinc-800 bg-zinc-900/50 p-5"
+                        className="mb-6 rounded-xl border border-border bg-card p-5"
                     >
-                        <h3 className="mb-4 text-lg font-semibold text-zinc-100">
+                        <h3 className="mb-4 text-lg font-semibold text-foreground">
                             {editingExtra ? 'Edit Extra' : 'New Extra'}
                         </h3>
                         <div className="grid gap-4 sm:grid-cols-3">
                             <div>
-                                <label className="mb-1 block text-sm text-zinc-400">
+                                <label className="mb-1 block text-sm text-muted-foreground">
                                     Name
                                 </label>
                                 <input
@@ -230,13 +232,13 @@ export default function AdminProductsIndex({
                                     onChange={(e) =>
                                         setExtraName(e.target.value)
                                     }
-                                    className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500"
+                                    className="w-full rounded-lg border border-border bg-muted px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground"
                                     placeholder="e.g. Extra Milk"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="mb-1 block text-sm text-zinc-400">
+                                <label className="mb-1 block text-sm text-muted-foreground">
                                     Price (RM)
                                 </label>
                                 <input
@@ -247,7 +249,7 @@ export default function AdminProductsIndex({
                                     onChange={(e) =>
                                         setExtraPrice(e.target.value)
                                     }
-                                    className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100"
+                                    className="w-full rounded-lg border border-border bg-muted px-3 py-2 text-sm text-foreground"
                                     placeholder="0.50"
                                     required
                                 />
@@ -262,7 +264,7 @@ export default function AdminProductsIndex({
                                 <button
                                     type="button"
                                     onClick={resetExtraForm}
-                                    className="rounded-lg border border-zinc-700 px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800"
+                                    className="rounded-lg border border-border px-4 py-2 text-sm text-muted-foreground hover:bg-muted"
                                 >
                                     Cancel
                                 </button>
@@ -271,10 +273,10 @@ export default function AdminProductsIndex({
                     </form>
                 )}
 
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/50">
+                <div className="rounded-xl border border-border bg-card">
                     <table className="w-full">
                         <thead>
-                            <tr className="border-b border-zinc-800 text-left text-sm text-zinc-400">
+                            <tr className="border-b border-border text-left text-sm text-muted-foreground">
                                 <th className="px-5 py-3 font-medium">Name</th>
                                 <th className="px-5 py-3 font-medium">Price</th>
                                 <th className="px-5 py-3 font-medium">
@@ -289,12 +291,12 @@ export default function AdminProductsIndex({
                             {extras.map((extra) => (
                                 <tr
                                     key={extra.id}
-                                    className="border-b border-zinc-800/50 last:border-b-0"
+                                    className="border-b border-border/50 last:border-b-0"
                                 >
-                                    <td className="px-5 py-3 text-zinc-200">
+                                    <td className="px-5 py-3 text-foreground/90">
                                         {extra.name}
                                     </td>
-                                    <td className="px-5 py-3 text-zinc-300">
+                                    <td className="px-5 py-3 text-foreground/80">
                                         RM {extra.price.toFixed(2)}
                                     </td>
                                     <td className="px-5 py-3">
@@ -305,7 +307,7 @@ export default function AdminProductsIndex({
                                             className={`rounded-full px-3 py-0.5 text-xs font-medium transition ${
                                                 extra.is_active
                                                     ? 'bg-green-500/10 text-green-400'
-                                                    : 'bg-zinc-700 text-zinc-500'
+                                                    : 'bg-muted-foreground text-muted-foreground'
                                             }`}
                                         >
                                             {extra.is_active
@@ -319,7 +321,7 @@ export default function AdminProductsIndex({
                                                 onClick={() =>
                                                     handleEditExtra(extra)
                                                 }
-                                                className="rounded p-1 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+                                                className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground/90"
                                             >
                                                 <Pencil className="h-4 w-4" />
                                             </button>
@@ -327,7 +329,7 @@ export default function AdminProductsIndex({
                                                 onClick={() =>
                                                     handleDeleteExtra(extra)
                                                 }
-                                                className="rounded p-1 text-zinc-400 hover:bg-red-500/10 hover:text-red-400"
+                                                className="rounded p-1 text-muted-foreground hover:bg-red-500/10 hover:text-red-400"
                                             >
                                                 <Trash2 className="h-4 w-4" />
                                             </button>
@@ -339,7 +341,7 @@ export default function AdminProductsIndex({
                                 <tr>
                                     <td
                                         colSpan={4}
-                                        className="px-5 py-12 text-center text-zinc-500"
+                                        className="px-5 py-12 text-center text-muted-foreground"
                                     >
                                         No extras added yet
                                     </td>

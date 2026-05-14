@@ -59,19 +59,19 @@ export default function AdminOrdersIndex({
             <div className="p-6">
                 <Link
                     href="/admin"
-                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition hover:text-zinc-200"
+                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition hover:text-foreground/90"
                 >
                     <ArrowLeft className="h-4 w-4" />
                     Back
                 </Link>
 
                 <div className="mb-6 flex items-center justify-between">
-                    <h1 className="text-2xl font-bold text-zinc-100">
+                    <h1 className="text-2xl font-bold text-foreground">
                         Orders ({orders.length})
                     </h1>
                     <Link
                         href="/admin/orders/completed"
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 px-3 py-1.5 text-sm text-zinc-400 transition hover:border-zinc-500 hover:text-zinc-200"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-muted-foreground transition hover:border-ring hover:text-foreground/90"
                     >
                         <CheckCircle className="h-4 w-4" />
                         View Completed
@@ -87,17 +87,17 @@ export default function AdminOrdersIndex({
                         const statusStyle =
                             statusConfig[
                                 order.status as keyof typeof statusConfig
-                            ]?.color ?? 'bg-zinc-500/10 text-zinc-400';
+                            ]?.color ?? 'bg-muted text-muted-foreground';
 
                         return (
                             <div
                                 key={order.id}
-                                className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5"
+                                className="rounded-xl border border-border bg-card p-5"
                             >
                                 <div className="mb-4 flex items-start justify-between">
                                     <div>
                                         <div className="flex items-center gap-3">
-                                            <span className="text-sm font-medium text-zinc-400">
+                                            <span className="text-sm font-medium text-muted-foreground">
                                                 Order #{order.id}
                                             </span>
                                             <span
@@ -110,7 +110,7 @@ export default function AdminOrdersIndex({
                                                     ]?.label
                                                 }
                                             </span>
-                                            <span className="inline-flex items-center gap-1 text-xs text-zinc-500">
+                                            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                                                 <MapPin className="h-3 w-3" />
                                                 <span className="capitalize">
                                                     {order.order_type ===
@@ -120,21 +120,21 @@ export default function AdminOrdersIndex({
                                                 </span>
                                             </span>
                                         </div>
-                                        <p className="mt-1 text-zinc-100">
+                                        <p className="mt-1 text-foreground">
                                             {order.customer_name || 'Guest'}
                                         </p>
                                         {order.customer_contact && (
-                                            <p className="text-sm text-zinc-500">
+                                            <p className="text-sm text-muted-foreground">
                                                 {order.customer_contact}
                                             </p>
                                         )}
                                         {order.order_type === 'delivery' &&
                                             order.customer_address && (
-                                                <p className="text-sm text-zinc-500">
+                                                <p className="text-sm text-muted-foreground">
                                                     {order.customer_address}
                                                 </p>
                                             )}
-                                        <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-zinc-500">
+                                        <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                                             {order.payment_method && (
                                                 <span className="inline-flex items-center gap-1">
                                                     <Truck className="h-3 w-3" />
@@ -165,14 +165,14 @@ export default function AdminOrdersIndex({
                                     {order.items.map((item) => (
                                         <div
                                             key={item.id}
-                                            className="rounded-lg bg-zinc-800/50 p-2"
+                                            className="rounded-lg bg-muted p-2"
                                         >
                                             <div className="flex items-center justify-between text-sm">
-                                                <span className="font-medium text-zinc-300">
+                                                <span className="font-medium text-foreground/80">
                                                     {item.quantity}x{' '}
                                                     {item.product_name}
                                                 </span>
-                                                <span className="text-zinc-400">
+                                                <span className="text-muted-foreground">
                                                     RM{' '}
                                                     {item.subtotal.toFixed(2)}
                                                 </span>
@@ -226,7 +226,7 @@ export default function AdminOrdersIndex({
                                                 })()}
                                             </div>
                                             {item.remark && (
-                                                <p className="mt-1 text-xs text-zinc-500 italic">
+                                                <p className="mt-1 text-xs text-muted-foreground italic">
                                                     &quot;{item.remark}&quot;
                                                 </p>
                                             )}
@@ -235,12 +235,12 @@ export default function AdminOrdersIndex({
                                 </div>
 
                                 {order.notes && (
-                                    <p className="mb-3 rounded-lg bg-zinc-800/50 p-2 text-sm text-zinc-400">
+                                    <p className="mb-3 rounded-lg bg-muted p-2 text-sm text-muted-foreground">
                                         Note: {order.notes}
                                     </p>
                                 )}
 
-                                <p className="mb-3 text-xs text-zinc-600">
+                                <p className="mb-3 text-xs text-muted-foreground">
                                     {new Date(
                                         order.created_at,
                                     ).toLocaleString()}
@@ -255,7 +255,7 @@ export default function AdminOrdersIndex({
                                                     'pending',
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800"
+                                            className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground hover:bg-muted"
                                         >
                                             Mark Pending
                                         </button>
@@ -287,7 +287,7 @@ export default function AdminOrdersIndex({
                     })}
 
                     {orders.length === 0 && (
-                        <div className="py-12 text-center text-zinc-500">
+                        <div className="py-12 text-center text-muted-foreground">
                             <p className="text-lg">No orders in progress</p>
                         </div>
                     )}

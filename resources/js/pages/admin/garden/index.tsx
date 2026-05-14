@@ -68,33 +68,33 @@ export default function AdminGardenIndex({
             <div className="p-6">
                 <Link
                     href="/admin"
-                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-zinc-400 transition hover:text-zinc-200"
+                    className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition hover:text-foreground/90"
                 >
                     <ArrowLeft className="h-4 w-4" />
                     Back
                 </Link>
-                <h1 className="mb-6 text-2xl font-bold text-zinc-100">
+                <h1 className="mb-6 text-2xl font-bold text-foreground">
                     Garden Gallery
                 </h1>
 
                 <form
                     onSubmit={handleUpload}
-                    className="mb-8 rounded-xl border border-zinc-800 bg-zinc-900/50 p-5"
+                    className="mb-8 rounded-xl border border-border bg-card p-5"
                 >
-                    <h2 className="mb-4 text-lg font-semibold text-zinc-100">
+                    <h2 className="mb-4 text-lg font-semibold text-foreground">
                         Upload New Image
                     </h2>
 
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label className="text-zinc-300">Image</Label>
+                            <Label className="text-foreground/80">Image</Label>
                             <Input
                                 type="file"
                                 accept="image/*"
                                 onChange={(e) =>
                                     setImage(e.target.files?.[0] ?? null)
                                 }
-                                className="border-zinc-700 bg-zinc-900 text-zinc-100 file:mr-3 file:rounded file:border-0 file:bg-zinc-800 file:px-3 file:py-1 file:text-sm file:text-zinc-300"
+                                className="border-border bg-card text-foreground file:mr-3 file:rounded file:border-0 file:bg-muted file:px-3 file:py-1 file:text-sm file:text-foreground/80"
                                 required
                             />
                             {fieldErrors.image && (
@@ -105,12 +105,14 @@ export default function AdminGardenIndex({
                         </div>
 
                         <div className="space-y-2">
-                            <Label className="text-zinc-300">Caption</Label>
+                            <Label className="text-foreground/80">
+                                Caption
+                            </Label>
                             <Input
                                 value={caption}
                                 onChange={(e) => setCaption(e.target.value)}
                                 placeholder="A beautiful garden view..."
-                                className="border-zinc-700 bg-zinc-900 text-zinc-100 placeholder:text-zinc-500"
+                                className="border-border bg-card text-foreground placeholder:text-muted-foreground"
                             />
                         </div>
 
@@ -129,9 +131,9 @@ export default function AdminGardenIndex({
                     {images.map((gardenImage) => (
                         <div
                             key={gardenImage.id}
-                            className="group relative overflow-hidden rounded-xl border border-zinc-800"
+                            className="group relative overflow-hidden rounded-xl border border-border"
                         >
-                            <div className="aspect-[4/3] bg-zinc-800">
+                            <div className="aspect-[4/3] bg-muted">
                                 <img
                                     src={gardenImage.image_url}
                                     alt={gardenImage.caption ?? 'Garden'}
@@ -163,9 +165,9 @@ export default function AdminGardenIndex({
                                         )
                                     }
                                     placeholder="Add a caption..."
-                                    className="w-full bg-transparent text-sm text-zinc-300 placeholder:text-zinc-600 focus:outline-none"
+                                    className="w-full bg-transparent text-sm text-foreground/80 placeholder:text-muted-foreground focus:outline-none"
                                 />
-                                <p className="mt-1 text-xs text-zinc-600">
+                                <p className="mt-1 text-xs text-muted-foreground">
                                     Order: {gardenImage.sort_order}
                                 </p>
                             </div>
@@ -173,7 +175,7 @@ export default function AdminGardenIndex({
                     ))}
 
                     {images.length === 0 && (
-                        <div className="col-span-full py-12 text-center text-zinc-500">
+                        <div className="col-span-full py-12 text-center text-muted-foreground">
                             <p className="text-lg">No garden images yet</p>
                             <p className="mt-1 text-sm">
                                 Upload photos of your garden

@@ -164,18 +164,18 @@ export function CartSidebar() {
                         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                         onClick={() => setIsOpen(false)}
                     />
-                    <div className="relative mt-auto flex h-[92svh] w-full flex-col rounded-t-3xl bg-zinc-950 shadow-2xl sm:mt-0 sm:ml-auto sm:h-full sm:max-w-md sm:rounded-none">
-                        <div className="mx-auto mt-3 h-1.5 w-12 rounded-full bg-zinc-700 sm:hidden" />
+                    <div className="relative mt-auto flex h-[92svh] w-full flex-col rounded-t-3xl bg-background shadow-2xl sm:mt-0 sm:ml-auto sm:h-full sm:max-w-md sm:rounded-none">
+                        <div className="mx-auto mt-3 h-1.5 w-12 rounded-full bg-muted-foreground sm:hidden" />
 
-                        <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3 sm:px-6 sm:py-4">
-                            <h2 className="text-lg font-semibold text-zinc-100">
+                        <div className="flex items-center justify-between border-b border-border px-4 py-3 sm:px-6 sm:py-4">
+                            <h2 className="text-lg font-semibold text-foreground">
                                 {step === 'order-type' && 'Order Type'}
                                 {step === 'details' && 'Your Details'}
                                 {step === 'cart' && 'Your Order'}
                             </h2>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
+                                className="rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
                             >
                                 <X className="h-5 w-5" />
                             </button>
@@ -185,11 +185,11 @@ export function CartSidebar() {
                             {step === 'order-type' && (
                                 <div className="flex min-h-full flex-col justify-center space-y-5 sm:space-y-6">
                                     <div className="text-center">
-                                        <p className="text-lg font-medium text-zinc-200">
+                                        <p className="text-lg font-medium text-foreground/90">
                                             How would you like to receive your
                                             order?
                                         </p>
-                                        <p className="mt-1 text-sm text-zinc-400">
+                                        <p className="mt-1 text-sm text-muted-foreground">
                                             {orderType === 'delivery'
                                                 ? 'Delivery only available for selected areas'
                                                 : 'Come pick up your drinks at our shop'}
@@ -204,13 +204,13 @@ export function CartSidebar() {
                                             className={`rounded-2xl border-2 p-4 text-left transition-all sm:p-6 ${
                                                 orderType === 'pickup'
                                                     ? 'border-amber-500 bg-amber-500/10'
-                                                    : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
+                                                    : 'border-border bg-card hover:border-border'
                                             }`}
                                         >
-                                            <p className="text-lg font-semibold text-zinc-100">
+                                            <p className="text-lg font-semibold text-foreground">
                                                 Self Pickup
                                             </p>
-                                            <p className="mt-1 text-sm text-zinc-400">
+                                            <p className="mt-1 text-sm text-muted-foreground">
                                                 Collect your order at Taman Ana
                                             </p>
                                         </button>
@@ -222,13 +222,13 @@ export function CartSidebar() {
                                             className={`rounded-2xl border-2 p-4 text-left transition-all sm:p-6 ${
                                                 orderType === 'delivery'
                                                     ? 'border-amber-500 bg-amber-500/10'
-                                                    : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
+                                                    : 'border-border bg-card hover:border-border'
                                             }`}
                                         >
-                                            <p className="text-lg font-semibold text-zinc-100">
+                                            <p className="text-lg font-semibold text-foreground">
                                                 Delivery
                                             </p>
-                                            <p className="mt-1 text-sm text-zinc-400">
+                                            <p className="mt-1 text-sm text-muted-foreground">
                                                 Available: Bukit Changgang,
                                                 Labohan Dagang, Olak Lempit, RTB
                                             </p>
@@ -237,7 +237,7 @@ export function CartSidebar() {
 
                                     {orderType === 'delivery' && (
                                         <div className="space-y-2">
-                                            <Label className="text-sm text-zinc-400">
+                                            <Label className="text-sm text-muted-foreground">
                                                 Delivery Area
                                             </Label>
                                             <select
@@ -247,11 +247,11 @@ export function CartSidebar() {
                                                         e.target.value,
                                                     )
                                                 }
-                                                className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-100 focus:border-amber-500 focus:outline-none"
+                                                className="w-full rounded-xl border border-border bg-card px-4 py-3 text-foreground focus:border-amber-500 focus:outline-none"
                                             >
                                                 <option
                                                     value=""
-                                                    className="bg-zinc-900"
+                                                    className="bg-card"
                                                 >
                                                     Select your area
                                                 </option>
@@ -259,7 +259,7 @@ export function CartSidebar() {
                                                     <option
                                                         key={area}
                                                         value={area}
-                                                        className="bg-zinc-900"
+                                                        className="bg-card"
                                                     >
                                                         {area}
                                                     </option>
@@ -285,7 +285,7 @@ export function CartSidebar() {
                                 <div className="space-y-4">
                                     {!user && (
                                         <div className="space-y-2">
-                                            <Label className="text-sm text-zinc-400">
+                                            <Label className="text-sm text-muted-foreground">
                                                 Your Name{' '}
                                                 <span className="text-red-400">
                                                     *
@@ -299,13 +299,13 @@ export function CartSidebar() {
                                                     )
                                                 }
                                                 placeholder="Enter your name"
-                                                className="border-zinc-700 bg-zinc-900 text-zinc-100 placeholder:text-zinc-500"
+                                                className="border-border bg-card text-foreground placeholder:text-muted-foreground"
                                             />
                                         </div>
                                     )}
 
                                     <div className="space-y-2">
-                                        <Label className="text-sm text-zinc-400">
+                                        <Label className="text-sm text-muted-foreground">
                                             Phone Number{' '}
                                             <span className="text-red-400">
                                                 *
@@ -313,7 +313,7 @@ export function CartSidebar() {
                                         </Label>
                                         {user?.phone ? (
                                             <div className="space-y-2">
-                                                <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-3">
+                                                <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-card p-3">
                                                     <Checkbox
                                                         checked={
                                                             useRegisteredPhone
@@ -335,9 +335,9 @@ export function CartSidebar() {
                                                                 );
                                                             }
                                                         }}
-                                                        className="border-zinc-600"
+                                                        className="border-border"
                                                     />
-                                                    <span className="text-sm text-zinc-200">
+                                                    <span className="text-sm text-foreground/90">
                                                         Use my registered number
                                                         ({user.phone})
                                                     </span>
@@ -351,7 +351,7 @@ export function CartSidebar() {
                                                             )
                                                         }
                                                         placeholder="Enter other phone number"
-                                                        className="border-zinc-700 bg-zinc-900 text-zinc-100 placeholder:text-zinc-500"
+                                                        className="border-border bg-card text-foreground placeholder:text-muted-foreground"
                                                     />
                                                 )}
                                             </div>
@@ -364,14 +364,14 @@ export function CartSidebar() {
                                                     )
                                                 }
                                                 placeholder="e.g. 012-3456789"
-                                                className="border-zinc-700 bg-zinc-900 text-zinc-100 placeholder:text-zinc-500"
+                                                className="border-border bg-card text-foreground placeholder:text-muted-foreground"
                                             />
                                         )}
                                     </div>
 
                                     {orderType === 'delivery' && (
                                         <div className="space-y-2">
-                                            <Label className="text-sm text-zinc-400">
+                                            <Label className="text-sm text-muted-foreground">
                                                 Delivery Address{' '}
                                                 <span className="text-red-400">
                                                     *
@@ -385,14 +385,14 @@ export function CartSidebar() {
                                                     )
                                                 }
                                                 placeholder="Your full delivery address"
-                                                className="w-full resize-none rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-amber-500 focus:outline-none"
+                                                className="w-full resize-none rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-amber-500 focus:outline-none"
                                                 rows={3}
                                             />
                                         </div>
                                     )}
 
                                     <div className="space-y-2">
-                                        <Label className="text-sm text-zinc-400">
+                                        <Label className="text-sm text-muted-foreground">
                                             Payment Method{' '}
                                             <span className="text-red-400">
                                                 *
@@ -407,7 +407,7 @@ export function CartSidebar() {
                                                 className={`rounded-xl border-2 px-4 py-3 text-sm font-medium transition-all ${
                                                     paymentMethod === 'duitnow'
                                                         ? 'border-amber-500 bg-amber-500/10 text-amber-400'
-                                                        : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                                                        : 'border-border text-muted-foreground hover:border-border'
                                                 }`}
                                             >
                                                 Online Banking / DuitNow
@@ -420,7 +420,7 @@ export function CartSidebar() {
                                                 className={`rounded-xl border-2 px-4 py-3 text-sm font-medium transition-all ${
                                                     paymentMethod === 'cash'
                                                         ? 'border-amber-500 bg-amber-500/10 text-amber-400'
-                                                        : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                                                        : 'border-border text-muted-foreground hover:border-border'
                                                 }`}
                                             >
                                                 Cash
@@ -430,7 +430,7 @@ export function CartSidebar() {
 
                                     <div className="grid grid-cols-2 gap-3">
                                         <div className="space-y-2">
-                                            <Label className="text-sm text-zinc-400">
+                                            <Label className="text-sm text-muted-foreground">
                                                 Pickup Time
                                             </Label>
                                             <Input
@@ -441,11 +441,11 @@ export function CartSidebar() {
                                                     )
                                                 }
                                                 placeholder="e.g. 3:00 PM"
-                                                className="border-zinc-700 bg-zinc-900 text-zinc-100 placeholder:text-zinc-500"
+                                                className="border-border bg-card text-foreground placeholder:text-muted-foreground"
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <Label className="text-sm text-zinc-400">
+                                            <Label className="text-sm text-muted-foreground">
                                                 Table #
                                             </Label>
                                             <Input
@@ -456,13 +456,13 @@ export function CartSidebar() {
                                                     )
                                                 }
                                                 placeholder="Optional"
-                                                className="border-zinc-700 bg-zinc-900 text-zinc-100 placeholder:text-zinc-500"
+                                                className="border-border bg-card text-foreground placeholder:text-muted-foreground"
                                             />
                                         </div>
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label className="text-sm text-zinc-400">
+                                        <Label className="text-sm text-muted-foreground">
                                             Order Notes
                                         </Label>
                                         <Input
@@ -471,17 +471,17 @@ export function CartSidebar() {
                                                 setNotes(e.target.value)
                                             }
                                             placeholder="Any special requests?"
-                                            className="border-zinc-700 bg-zinc-900 text-zinc-100 placeholder:text-zinc-500"
+                                            className="border-border bg-card text-foreground placeholder:text-muted-foreground"
                                         />
                                     </div>
 
-                                    <div className="sticky bottom-0 grid grid-cols-[0.8fr_1.2fr] gap-3 bg-zinc-950 pt-3">
+                                    <div className="sticky bottom-0 grid grid-cols-[0.8fr_1.2fr] gap-3 bg-background pt-3">
                                         <Button
                                             onClick={() =>
                                                 setStep('order-type')
                                             }
                                             variant="outline"
-                                            className="flex-1 border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100"
+                                            className="flex-1 border-border text-foreground/80 hover:bg-muted hover:text-foreground"
                                         >
                                             Back
                                         </Button>
@@ -499,7 +499,7 @@ export function CartSidebar() {
                             {step === 'cart' && (
                                 <div>
                                     {items.length === 0 ? (
-                                        <div className="flex h-full flex-col items-center justify-center text-center text-zinc-500">
+                                        <div className="flex h-full flex-col items-center justify-center text-center text-muted-foreground">
                                             <ShoppingCart className="mb-4 h-12 w-12" />
                                             <p className="text-lg font-medium">
                                                 Your cart is empty
@@ -513,14 +513,14 @@ export function CartSidebar() {
                                             {items.map((item, index) => (
                                                 <div
                                                     key={`${item.product.id}-${index}`}
-                                                    className="rounded-lg bg-zinc-900 p-3"
+                                                    className="rounded-lg bg-card p-3"
                                                 >
                                                     <div className="flex items-center gap-3">
                                                         <span className="text-2xl">
                                                             {item.product.icon}
                                                         </span>
                                                         <div className="min-w-0 flex-1">
-                                                            <p className="truncate font-medium text-zinc-100">
+                                                            <p className="truncate font-medium text-foreground">
                                                                 {
                                                                     item.product
                                                                         .name
@@ -584,7 +584,7 @@ export function CartSidebar() {
                                                                 })()}
                                                             </div>
                                                             {item.remark && (
-                                                                <p className="mt-1 text-xs text-zinc-500">
+                                                                <p className="mt-1 text-xs text-muted-foreground">
                                                                     &quot;
                                                                     {
                                                                         item.remark
@@ -611,11 +611,11 @@ export function CartSidebar() {
                                                                             1,
                                                                     )
                                                                 }
-                                                                className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                                                                className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-foreground/80 hover:bg-muted/80"
                                                             >
                                                                 <Minus className="h-3 w-3" />
                                                             </button>
-                                                            <span className="w-6 text-center text-sm font-medium text-zinc-100">
+                                                            <span className="w-6 text-center text-sm font-medium text-foreground">
                                                                 {item.quantity}
                                                             </span>
                                                             <button
@@ -626,7 +626,7 @@ export function CartSidebar() {
                                                                             1,
                                                                     )
                                                                 }
-                                                                className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                                                                className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-foreground/80 hover:bg-muted/80"
                                                             >
                                                                 <Plus className="h-3 w-3" />
                                                             </button>
@@ -636,7 +636,7 @@ export function CartSidebar() {
                                                                         index,
                                                                     )
                                                                 }
-                                                                className="rounded-lg p-1.5 text-zinc-500 hover:bg-red-500/10 hover:text-red-400"
+                                                                className="rounded-lg p-1.5 text-muted-foreground hover:bg-red-500/10 hover:text-red-400"
                                                             >
                                                                 <Trash2 className="h-4 w-4" />
                                                             </button>
@@ -645,12 +645,12 @@ export function CartSidebar() {
                                                 </div>
                                             ))}
 
-                                            <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-3">
-                                                <h4 className="mb-2 text-sm font-medium text-zinc-400">
+                                            <div className="rounded-lg border border-border bg-card p-3">
+                                                <h4 className="mb-2 text-sm font-medium text-muted-foreground">
                                                     Order Summary
                                                 </h4>
                                                 <div className="space-y-1 text-sm">
-                                                    <div className="flex justify-between text-zinc-300">
+                                                    <div className="flex justify-between text-foreground/80">
                                                         <span>Type</span>
                                                         <span className="capitalize">
                                                             {orderType ===
@@ -659,7 +659,7 @@ export function CartSidebar() {
                                                                 : 'Self Pickup'}
                                                         </span>
                                                     </div>
-                                                    <div className="flex justify-between text-zinc-300">
+                                                    <div className="flex justify-between text-foreground/80">
                                                         <span>Payment</span>
                                                         <span>
                                                             {paymentMethod ===
@@ -668,13 +668,13 @@ export function CartSidebar() {
                                                                 : 'Cash'}
                                                         </span>
                                                     </div>
-                                                    <div className="flex justify-between text-zinc-300">
+                                                    <div className="flex justify-between text-foreground/80">
                                                         <span>Name</span>
                                                         <span>
                                                             {customerName}
                                                         </span>
                                                     </div>
-                                                    <div className="flex justify-between text-zinc-300">
+                                                    <div className="flex justify-between text-foreground/80">
                                                         <span>Contact</span>
                                                         <span>
                                                             {customerContact}
@@ -682,7 +682,7 @@ export function CartSidebar() {
                                                     </div>
                                                     {orderType === 'delivery' &&
                                                         customerAddress && (
-                                                            <div className="flex justify-between text-zinc-300">
+                                                            <div className="flex justify-between text-foreground/80">
                                                                 <span>
                                                                     Address
                                                                 </span>
@@ -702,9 +702,9 @@ export function CartSidebar() {
                         </div>
 
                         {step === 'cart' && items.length > 0 && (
-                            <div className="border-t border-zinc-800 px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:px-6">
+                            <div className="border-t border-border px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:px-6">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-lg font-semibold text-zinc-100">
+                                    <span className="text-lg font-semibold text-foreground">
                                         Total
                                     </span>
                                     <span className="text-xl font-bold text-amber-400">
@@ -725,13 +725,13 @@ export function CartSidebar() {
                                 <div className="mt-2 flex gap-2">
                                     <button
                                         onClick={() => setStep('details')}
-                                        className="flex-1 rounded-lg py-2 text-center text-sm text-zinc-500 hover:text-zinc-300"
+                                        className="flex-1 rounded-lg py-2 text-center text-sm text-muted-foreground hover:text-foreground/80"
                                     >
                                         Edit Details
                                     </button>
                                     <button
                                         onClick={clearCart}
-                                        className="flex-1 rounded-lg py-2 text-center text-sm text-zinc-500 hover:text-zinc-300"
+                                        className="flex-1 rounded-lg py-2 text-center text-sm text-muted-foreground hover:text-foreground/80"
                                     >
                                         Clear Cart
                                     </button>

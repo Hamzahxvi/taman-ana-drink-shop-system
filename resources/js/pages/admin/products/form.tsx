@@ -79,13 +79,13 @@ export default function AdminProductForm({
             <Head title={isEditing ? 'Edit Product' : 'Add Product'} />
 
             <div className="p-6">
-                <h1 className="mb-6 text-2xl font-bold text-zinc-100">
+                <h1 className="mb-6 text-2xl font-bold text-foreground">
                     {isEditing ? 'Edit Product' : 'Add Product'}
                 </h1>
 
                 <form onSubmit={handleSubmit} className="max-w-lg space-y-5">
                     <div className="space-y-2">
-                        <Label htmlFor="name" className="text-zinc-300">
+                        <Label htmlFor="name" className="text-foreground/80">
                             Name
                         </Label>
                         <Input
@@ -94,7 +94,7 @@ export default function AdminProductForm({
                             onChange={(e) =>
                                 setForm({ ...form, name: e.target.value })
                             }
-                            className="border-zinc-700 bg-zinc-900 text-zinc-100"
+                            className="border-border bg-card text-foreground"
                             required
                         />
                         {fieldErrors.name && (
@@ -105,7 +105,10 @@ export default function AdminProductForm({
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="description" className="text-zinc-300">
+                        <Label
+                            htmlFor="description"
+                            className="text-foreground/80"
+                        >
                             Description
                         </Label>
                         <textarea
@@ -118,13 +121,16 @@ export default function AdminProductForm({
                                 })
                             }
                             rows={3}
-                            className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus:ring-2 focus:ring-amber-500/50 focus:outline-none"
+                            className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-amber-500/50 focus:outline-none"
                         />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <Label htmlFor="price" className="text-zinc-300">
+                            <Label
+                                htmlFor="price"
+                                className="text-foreground/80"
+                            >
                                 Price (RM)
                             </Label>
                             <Input
@@ -139,7 +145,7 @@ export default function AdminProductForm({
                                         price: e.target.value,
                                     })
                                 }
-                                className="border-zinc-700 bg-zinc-900 text-zinc-100"
+                                className="border-border bg-card text-foreground"
                                 required
                             />
                             {fieldErrors.price && (
@@ -150,7 +156,10 @@ export default function AdminProductForm({
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="icon" className="text-zinc-300">
+                            <Label
+                                htmlFor="icon"
+                                className="text-foreground/80"
+                            >
                                 Icon (emoji)
                             </Label>
                             <Input
@@ -160,14 +169,17 @@ export default function AdminProductForm({
                                     setForm({ ...form, icon: e.target.value })
                                 }
                                 placeholder="☕"
-                                className="border-zinc-700 bg-zinc-900 text-zinc-100"
+                                className="border-border bg-card text-foreground"
                             />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <Label htmlFor="category" className="text-zinc-300">
+                            <Label
+                                htmlFor="category"
+                                className="text-foreground/80"
+                            >
                                 Category
                             </Label>
                             <Select
@@ -176,10 +188,10 @@ export default function AdminProductForm({
                                     setForm({ ...form, category: v })
                                 }
                             >
-                                <SelectTrigger className="border-zinc-700 bg-zinc-900 text-zinc-100">
+                                <SelectTrigger className="border-border bg-card text-foreground">
                                     <SelectValue placeholder="Select category" />
                                 </SelectTrigger>
-                                <SelectContent className="border-zinc-700 bg-zinc-900">
+                                <SelectContent className="border-border bg-card">
                                     <SelectItem value="Coffee">
                                         Coffee
                                     </SelectItem>
@@ -192,7 +204,9 @@ export default function AdminProductForm({
                         </div>
 
                         <div className="space-y-2">
-                            <Label className="text-zinc-300">Available</Label>
+                            <Label className="text-foreground/80">
+                                Available
+                            </Label>
                             <div className="flex items-center gap-3 pt-2">
                                 <button
                                     type="button"
@@ -205,7 +219,7 @@ export default function AdminProductForm({
                                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                                         form.is_available
                                             ? 'bg-green-500'
-                                            : 'bg-zinc-700'
+                                            : 'bg-muted-foreground'
                                     }`}
                                 >
                                     <span
@@ -216,7 +230,7 @@ export default function AdminProductForm({
                                         }`}
                                     />
                                 </button>
-                                <span className="text-sm text-zinc-400">
+                                <span className="text-sm text-muted-foreground">
                                     {form.is_available ? 'Yes' : 'No'}
                                 </span>
                             </div>
@@ -224,13 +238,13 @@ export default function AdminProductForm({
                     </div>
 
                     <div className="space-y-2">
-                        <Label className="text-zinc-300">Extras</Label>
-                        <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
+                        <Label className="text-foreground/80">Extras</Label>
+                        <div className="rounded-xl border border-border bg-card p-4">
                             <div className="grid gap-2 sm:grid-cols-2">
                                 {extras.map((extra) => (
                                     <label
                                         key={extra.id}
-                                        className="flex cursor-pointer items-center gap-3 rounded-lg p-2 text-sm transition hover:bg-zinc-800/50"
+                                        className="flex cursor-pointer items-center gap-3 rounded-lg p-2 text-sm transition hover:bg-muted"
                                     >
                                         <input
                                             type="checkbox"
@@ -252,19 +266,19 @@ export default function AdminProductForm({
                                                           ),
                                                 });
                                             }}
-                                            className="h-4 w-4 rounded border-zinc-600 bg-zinc-800 text-amber-500 focus:ring-amber-500"
+                                            className="h-4 w-4 rounded border-border bg-muted text-amber-500 focus:ring-amber-500"
                                         />
-                                        <span className="text-zinc-200">
+                                        <span className="text-foreground/90">
                                             {extra.name}
                                         </span>
-                                        <span className="ml-auto text-xs text-zinc-500">
+                                        <span className="ml-auto text-xs text-muted-foreground">
                                             +RM {extra.price.toFixed(2)}
                                         </span>
                                     </label>
                                 ))}
                             </div>
                             {extras.length === 0 && (
-                                <p className="py-2 text-center text-sm text-zinc-500">
+                                <p className="py-2 text-center text-sm text-muted-foreground">
                                     No extras available.
                                 </p>
                             )}
@@ -272,7 +286,7 @@ export default function AdminProductForm({
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="image" className="text-zinc-300">
+                        <Label htmlFor="image" className="text-foreground/80">
                             Image (optional)
                         </Label>
                         <Input
@@ -282,7 +296,7 @@ export default function AdminProductForm({
                             onChange={(e) =>
                                 setImage(e.target.files?.[0] ?? null)
                             }
-                            className="border-zinc-700 bg-zinc-900 text-zinc-100 file:mr-3 file:rounded file:border-0 file:bg-zinc-800 file:px-3 file:py-1 file:text-sm file:text-zinc-300"
+                            className="border-border bg-card text-foreground file:mr-3 file:rounded file:border-0 file:bg-muted file:px-3 file:py-1 file:text-sm file:text-foreground/80"
                         />
                         {fieldErrors.image && (
                             <p className="text-sm text-red-400">
@@ -302,7 +316,7 @@ export default function AdminProductForm({
                             type="button"
                             variant="ghost"
                             onClick={() => router.visit('/admin/products')}
-                            className="text-zinc-400 hover:text-zinc-100"
+                            className="text-muted-foreground hover:text-foreground"
                         >
                             Cancel
                         </Button>

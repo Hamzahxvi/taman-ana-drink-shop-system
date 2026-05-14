@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 import type { PropsWithChildren } from 'react';
 import Heading from '@/components/heading';
 import { Button } from '@/components/ui/button';
@@ -33,6 +34,17 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
 
     return (
         <div className="px-4 py-6">
+            <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="mb-4 gap-2 px-0 text-muted-foreground hover:text-foreground"
+                onClick={() => window.history.back()}
+            >
+                <ArrowLeft className="h-4 w-4" />
+                Back
+            </Button>
+
             <Heading
                 title="Settings"
                 description="Manage your profile and account settings"
