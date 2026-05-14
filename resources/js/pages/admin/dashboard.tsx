@@ -126,21 +126,6 @@ export default function AdminDashboard({
 
                     <div className="space-y-4">
                         <Link
-                            href="/admin/products"
-                            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
-                        >
-                            <div>
-                                <h3 className="font-semibold text-zinc-100">
-                                    Manage Menu
-                                </h3>
-                                <p className="text-sm text-zinc-400">
-                                    Add, edit, or remove drink items
-                                </p>
-                            </div>
-                            <span className="text-2xl">☕</span>
-                        </Link>
-
-                        <Link
                             href="/admin/orders"
                             className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
                         >
@@ -153,6 +138,21 @@ export default function AdminDashboard({
                                 </p>
                             </div>
                             <span className="text-2xl">📋</span>
+                        </Link>
+
+                        <Link
+                            href="/admin/products"
+                            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50"
+                        >
+                            <div>
+                                <h3 className="font-semibold text-zinc-100">
+                                    Manage Menu
+                                </h3>
+                                <p className="text-sm text-zinc-400">
+                                    Add, edit, or remove drink items
+                                </p>
+                            </div>
+                            <span className="text-2xl">☕</span>
                         </Link>
 
                         <Link
