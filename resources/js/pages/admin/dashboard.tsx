@@ -23,6 +23,7 @@ export default function AdminDashboard({
 }) {
     const { auth } = usePage().props;
     const isAdmin = auth.user?.role === 'admin';
+    const dashboardTitle = isAdmin ? 'Admin Dashboard' : 'Staff Dashboard';
     const cards = [
         {
             label: 'Orders Today',
@@ -52,12 +53,12 @@ export default function AdminDashboard({
 
     return (
         <>
-            <Head title="Admin Dashboard" />
+            <Head title={dashboardTitle} />
 
             <div className="p-6">
                 <div className="mb-8 flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-foreground">
-                        Admin Dashboard
+                        {dashboardTitle}
                     </h1>
                     <button
                         onClick={() =>
