@@ -15,8 +15,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html
