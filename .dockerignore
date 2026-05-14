@@ -1,6 +1,5 @@
 /node_modules
 /vendor
-/public/build
 /.git
 /.github
 /.env

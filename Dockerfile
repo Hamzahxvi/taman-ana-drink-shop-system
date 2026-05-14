@@ -23,11 +23,12 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 
 ARG CACHEBUST=1
-RUN rm -rf public/build
+RUN echo "build-v2"
 
-RUN composer install --no-interaction --optimize-autoloader --no-dev \
-    && npm ci \
-    && npm run build \
+RUN cp .env.example .env \
+    && touch database/database.sqlite \
+    && composer install --no-interaction --optimize-autoloader --no-dev \
+    && php artisan key:generate --force \
     && chown -R www-data:www-data /var/www/html/storage \
     && chown -R www-data:www-data /var/www/html/bootstrap/cache
 
