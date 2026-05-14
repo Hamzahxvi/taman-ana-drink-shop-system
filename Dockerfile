@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-ARG CACHEBUST=4
+ARG CACHEBUST=5
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
