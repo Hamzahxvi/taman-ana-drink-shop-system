@@ -24,6 +24,7 @@ WORKDIR /var/www/html
 
 RUN composer install --no-interaction --optimize-autoloader --no-dev \
     && npm ci \
+    && rm -rf public/build \
     && npm run build \
     && chown -R www-data:www-data /var/www/html/storage \
     && chown -R www-data:www-data /var/www/html/bootstrap/cache
