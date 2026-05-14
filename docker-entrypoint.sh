@@ -5,6 +5,10 @@ if [ ! -f .env ]; then
     cp .env.example .env
 fi
 
+if [ -n "$RENDER_EXTERNAL_URL" ]; then
+    sed -i "s|APP_URL=.*|APP_URL=$RENDER_EXTERNAL_URL|" .env
+fi
+
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "" ]; then
     php artisan key:generate --force
 fi
