@@ -1,5 +1,5 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { ArrowDown, Coffee, LogOut, MapPin } from 'lucide-react';
+import { Coffee, LogOut, MapPin, Phone } from 'lucide-react';
 import { login, register } from '@/routes';
 
 export function HeroSection({ hasPastOrder }: { hasPastOrder?: boolean }) {
@@ -13,38 +13,38 @@ export function HeroSection({ hasPastOrder }: { hasPastOrder?: boolean }) {
     };
 
     return (
-        <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4">
-            <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-900/20 via-zinc-900/50 to-transparent" />
+        <section className="relative flex min-h-[92svh] flex-col overflow-hidden px-4 pt-6 pb-8 sm:min-h-screen sm:items-center sm:justify-center sm:py-16">
+            <div className="absolute inset-0 bg-zinc-950" />
+            <div className="absolute inset-x-0 top-0 h-[52svh] bg-[linear-gradient(180deg,rgba(245,158,11,0.2),rgba(39,39,42,0.45),rgba(9,9,11,0))]" />
 
-            <div className="relative z-10 mx-auto max-w-4xl text-center">
-                <div className="mb-6 flex justify-center">
-                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-amber-500/10 ring-1 ring-amber-500/20">
-                        <Coffee className="h-12 w-12 text-amber-400" />
+            <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center text-center">
+                <div className="mb-5 flex justify-center sm:mb-6">
+                    <div className="flex h-18 w-18 items-center justify-center rounded-full bg-amber-500/10 ring-1 ring-amber-500/20 sm:h-24 sm:w-24">
+                        <Coffee className="h-9 w-9 text-amber-400 sm:h-12 sm:w-12" />
                     </div>
                 </div>
 
-                <h1 className="mb-4 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
+                <h1 className="mb-3 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:mb-4 sm:text-6xl lg:text-7xl">
                     Taman Ana
                 </h1>
 
-                <p className="mb-8 text-xl text-zinc-300 sm:text-2xl">
+                <p className="mx-auto mb-7 max-w-xs text-lg leading-7 text-zinc-300 sm:mb-8 sm:max-w-none sm:text-2xl">
                     Your Garden Drink Escape
                 </p>
 
-                <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+                <div className="mx-auto grid w-full max-w-sm gap-3 sm:max-w-none sm:auto-cols-max sm:grid-flow-col sm:justify-center sm:gap-4">
                     <a
                         href="#menu"
-                        className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-4 text-base font-semibold text-black transition-all hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/25 active:scale-95"
+                        className="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 text-base font-semibold text-black transition-all hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/25 active:scale-95 sm:rounded-full sm:px-8"
                     >
                         <Coffee className="h-5 w-5" />
-                        Order Your Drink Now
+                        Order Now
                     </a>
 
                     {hasPastOrder && (
                         <a
                             href="/past-orders"
-                            className="inline-flex items-center gap-2 rounded-full border border-amber-500/50 bg-amber-500/10 px-8 py-4 text-base font-semibold text-amber-400 transition-all hover:border-amber-400 hover:bg-amber-500/20 active:scale-95"
+                            className="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl border border-amber-500/50 bg-amber-500/10 px-5 text-base font-semibold text-amber-400 transition-all hover:border-amber-400 hover:bg-amber-500/20 active:scale-95 sm:rounded-full sm:px-8"
                         >
                             <MapPin className="h-5 w-5" />
                             My Orders
@@ -54,7 +54,7 @@ export function HeroSection({ hasPastOrder }: { hasPastOrder?: boolean }) {
                     {user ? (
                         <button
                             onClick={handleLogout}
-                            className="inline-flex items-center gap-2 rounded-full border border-red-800 px-8 py-4 text-base font-semibold text-red-400 transition-all hover:border-red-600 hover:bg-red-500/10 active:scale-95"
+                            className="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl border border-red-800 px-5 text-base font-semibold text-red-400 transition-all hover:border-red-600 hover:bg-red-500/10 active:scale-95 sm:rounded-full sm:px-8"
                         >
                             <LogOut className="h-5 w-5" />
                             Logout
@@ -63,14 +63,14 @@ export function HeroSection({ hasPastOrder }: { hasPastOrder?: boolean }) {
                         <>
                             <Link
                                 href={login()}
-                                className="inline-flex items-center gap-2 rounded-full border border-zinc-700 px-8 py-4 text-base font-semibold text-zinc-300 transition-all hover:border-zinc-500 hover:text-zinc-100 active:scale-95"
+                                className="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl border border-zinc-700 px-5 text-base font-semibold text-zinc-300 transition-all hover:border-zinc-500 hover:text-zinc-100 active:scale-95 sm:rounded-full sm:px-8"
                             >
                                 Sign In
                             </Link>
                             {canRegister && (
                                 <Link
                                     href={register()}
-                                    className="inline-flex items-center gap-2 rounded-full border border-amber-600 px-8 py-4 text-base font-semibold text-amber-400 transition-all hover:border-amber-500 hover:bg-amber-500/10 active:scale-95"
+                                    className="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl border border-amber-600 px-5 text-base font-semibold text-amber-400 transition-all hover:border-amber-500 hover:bg-amber-500/10 active:scale-95 sm:rounded-full sm:px-8"
                                 >
                                     Register
                                 </Link>
@@ -79,12 +79,12 @@ export function HeroSection({ hasPastOrder }: { hasPastOrder?: boolean }) {
                     )}
                 </div>
 
-                <div className="mt-12 flex items-center justify-center gap-8 text-sm text-zinc-600">
+                <div className="mt-8 flex items-center justify-center gap-3 text-sm text-zinc-500 sm:mt-12 sm:gap-8 sm:text-zinc-600">
                     <a
                         href="https://wa.me/601131791108"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 hover:text-amber-400"
+                        className="flex min-h-10 items-center gap-2 rounded-full border border-zinc-800 px-4 hover:text-amber-400 sm:min-h-0 sm:border-0 sm:px-0"
                     >
                         <svg
                             className="h-4 w-4"
@@ -97,22 +97,12 @@ export function HeroSection({ hasPastOrder }: { hasPastOrder?: boolean }) {
                     </a>
                     <a
                         href="tel:+601131791108"
-                        className="flex items-center gap-2 hover:text-amber-400"
+                        className="flex min-h-10 items-center gap-2 rounded-full border border-zinc-800 px-4 hover:text-amber-400 sm:min-h-0 sm:border-0 sm:px-0"
                     >
-                        <svg
-                            className="h-4 w-4"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                        >
-                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                        </svg>
+                        <Phone className="h-4 w-4" />
                         Call
                     </a>
                 </div>
-            </div>
-
-            <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce">
-                <ArrowDown className="h-6 w-6 text-zinc-500" />
             </div>
         </section>
     );

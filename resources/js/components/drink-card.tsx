@@ -28,34 +28,36 @@ export function DrinkCard({
 
     return (
         <>
-            <div className="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5">
-                <div className="mb-4 flex items-center justify-center">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-zinc-800/50 text-4xl transition-transform group-hover:scale-110">
+            <div className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 transition-all hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5 sm:p-5">
+                <div className="flex items-start gap-4 sm:block">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-zinc-800/70 text-3xl transition-transform group-hover:scale-110 sm:mx-auto sm:mb-4 sm:h-20 sm:w-20 sm:rounded-full sm:text-4xl">
                         {product.icon}
+                    </div>
+
+                    <div className="min-w-0 flex-1 sm:text-center">
+                        <h3 className="text-lg leading-tight font-semibold text-zinc-100">
+                            {product.name}
+                        </h3>
+
+                        {product.description && (
+                            <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-zinc-400 sm:mt-2 sm:line-clamp-none">
+                                {product.description}
+                            </p>
+                        )}
                     </div>
                 </div>
 
-                <h3 className="text-center text-lg font-semibold text-zinc-100">
-                    {product.name}
-                </h3>
-
-                {product.description && (
-                    <p className="mt-2 text-center text-sm leading-relaxed text-zinc-400">
-                        {product.description}
-                    </p>
-                )}
-
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-4 flex items-center justify-between gap-3">
                     <span className="text-xl font-bold text-amber-400">
                         RM {product.price.toFixed(2)}
                     </span>
 
                     <button
                         onClick={() => setDialogOpen(true)}
-                        className="flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/25 active:scale-95"
+                        className="flex min-h-11 items-center gap-2 rounded-xl bg-amber-500 px-4 text-sm font-semibold text-black transition-all hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/25 active:scale-95"
                     >
                         <ShoppingCart className="h-4 w-4" />
-                        Customize
+                        Add
                     </button>
                 </div>
             </div>

@@ -147,7 +147,7 @@ export function CartSidebar() {
         <>
             <button
                 onClick={openCart}
-                className="fixed right-6 bottom-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-amber-500 text-black shadow-lg transition-all hover:scale-110 hover:bg-amber-400 active:scale-95"
+                className="fixed right-4 bottom-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-amber-500 text-black shadow-lg shadow-amber-950/40 transition-all hover:scale-110 hover:bg-amber-400 active:scale-95 sm:right-6 sm:bottom-6"
                 aria-label="Open cart"
             >
                 <ShoppingCart className="h-6 w-6" />
@@ -164,8 +164,10 @@ export function CartSidebar() {
                         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                         onClick={() => setIsOpen(false)}
                     />
-                    <div className="relative ml-auto flex h-full w-full max-w-md flex-col bg-zinc-950 shadow-2xl">
-                        <div className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
+                    <div className="relative mt-auto flex h-[92svh] w-full flex-col rounded-t-3xl bg-zinc-950 shadow-2xl sm:mt-0 sm:ml-auto sm:h-full sm:max-w-md sm:rounded-none">
+                        <div className="mx-auto mt-3 h-1.5 w-12 rounded-full bg-zinc-700 sm:hidden" />
+
+                        <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3 sm:px-6 sm:py-4">
                             <h2 className="text-lg font-semibold text-zinc-100">
                                 {step === 'order-type' && 'Order Type'}
                                 {step === 'details' && 'Your Details'}
@@ -179,9 +181,9 @@ export function CartSidebar() {
                             </button>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto px-6 py-4">
+                        <div className="flex-1 overflow-y-auto px-4 py-4 sm:px-6">
                             {step === 'order-type' && (
-                                <div className="flex h-full flex-col justify-center space-y-6">
+                                <div className="flex min-h-full flex-col justify-center space-y-5 sm:space-y-6">
                                     <div className="text-center">
                                         <p className="text-lg font-medium text-zinc-200">
                                             How would you like to receive your
@@ -194,12 +196,12 @@ export function CartSidebar() {
                                         </p>
                                     </div>
 
-                                    <div className="grid gap-4">
+                                    <div className="grid gap-3 sm:gap-4">
                                         <button
                                             onClick={() =>
                                                 setOrderType('pickup')
                                             }
-                                            className={`rounded-2xl border-2 p-6 text-left transition-all ${
+                                            className={`rounded-2xl border-2 p-4 text-left transition-all sm:p-6 ${
                                                 orderType === 'pickup'
                                                     ? 'border-amber-500 bg-amber-500/10'
                                                     : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
@@ -217,7 +219,7 @@ export function CartSidebar() {
                                             onClick={() =>
                                                 setOrderType('delivery')
                                             }
-                                            className={`rounded-2xl border-2 p-6 text-left transition-all ${
+                                            className={`rounded-2xl border-2 p-4 text-left transition-all sm:p-6 ${
                                                 orderType === 'delivery'
                                                     ? 'border-amber-500 bg-amber-500/10'
                                                     : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
@@ -272,7 +274,7 @@ export function CartSidebar() {
                                             orderType === 'delivery' &&
                                             deliveryArea === ''
                                         }
-                                        className="w-full bg-amber-500 py-6 text-base font-semibold text-black hover:bg-amber-400 disabled:opacity-50"
+                                        className="min-h-12 w-full bg-amber-500 text-base font-semibold text-black hover:bg-amber-400 disabled:opacity-50"
                                     >
                                         Continue
                                     </Button>
@@ -473,7 +475,7 @@ export function CartSidebar() {
                                         />
                                     </div>
 
-                                    <div className="flex gap-3 pt-2">
+                                    <div className="sticky bottom-0 grid grid-cols-[0.8fr_1.2fr] gap-3 bg-zinc-950 pt-3">
                                         <Button
                                             onClick={() =>
                                                 setStep('order-type')
@@ -486,7 +488,7 @@ export function CartSidebar() {
                                         <Button
                                             onClick={handleDetailsNext}
                                             disabled={!isDetailsValid}
-                                            className="flex-1 bg-amber-500 py-6 text-base font-semibold text-black hover:bg-amber-400 disabled:opacity-50"
+                                            className="min-h-12 bg-amber-500 text-base font-semibold text-black hover:bg-amber-400 disabled:opacity-50"
                                         >
                                             Review Order
                                         </Button>
@@ -700,7 +702,7 @@ export function CartSidebar() {
                         </div>
 
                         {step === 'cart' && items.length > 0 && (
-                            <div className="border-t border-zinc-800 px-6 py-4">
+                            <div className="border-t border-zinc-800 px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:px-6">
                                 <div className="flex items-center justify-between">
                                     <span className="text-lg font-semibold text-zinc-100">
                                         Total
@@ -713,7 +715,7 @@ export function CartSidebar() {
                                 <Button
                                     onClick={handlePlaceOrder}
                                     disabled={submitting}
-                                    className="mt-4 w-full bg-amber-500 py-6 text-base font-semibold text-black hover:bg-amber-400 disabled:opacity-50"
+                                    className="mt-4 min-h-13 w-full bg-amber-500 text-base font-semibold text-black hover:bg-amber-400 disabled:opacity-50"
                                 >
                                     {submitting
                                         ? 'Placing Order...'

@@ -29,26 +29,26 @@ export default function Welcome({
 
     return (
         <CartProvider>
-            <Head title="Taman Ana — Your Garden Drink Escape" />
+            <Head title="Taman Ana - Your Garden Drink Escape" />
 
             <div className="bg-zinc-950 text-zinc-100">
                 <HeroSection hasPastOrder={hasPastOrder} />
 
-                <section id="menu" className="relative px-4 py-24">
+                <section id="menu" className="relative px-4 py-14 sm:py-24">
                     <div className="mx-auto max-w-7xl">
-                        <div className="mb-12 text-center">
-                            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                        <div className="mb-8 text-center sm:mb-12">
+                            <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">
                                 Our{' '}
                                 <span className="text-amber-400">
                                     Signature Menu
                                 </span>
                             </h2>
-                            <p className="mt-3 text-zinc-400">
+                            <p className="mx-auto mt-2 max-w-xs text-sm text-zinc-400 sm:mt-3 sm:max-w-none sm:text-base">
                                 Handcrafted beverages made with love
                             </p>
                         </div>
 
-                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
                             {products.map((product) => (
                                 <DrinkCard
                                     key={product.id}
@@ -61,26 +61,26 @@ export default function Welcome({
                 </section>
 
                 {gardenImages.length > 0 && (
-                    <section className="relative px-4 py-24">
+                    <section className="relative px-4 py-14 sm:py-24">
                         <div className="mx-auto max-w-7xl">
-                            <div className="mb-12 text-center">
-                                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                            <div className="mb-8 text-center sm:mb-12">
+                                <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">
                                     Our{' '}
                                     <span className="text-amber-400">
                                         Garden
                                     </span>
                                 </h2>
-                                <p className="mt-3 text-zinc-400">
+                                <p className="mx-auto mt-2 max-w-xs text-sm text-zinc-400 sm:mt-3 sm:max-w-none sm:text-base">
                                     Relax in the serene beauty of Taman Ana
                                 </p>
                             </div>
 
-                            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            <div className="grid snap-x auto-cols-[82%] grid-flow-col gap-4 overflow-x-auto pb-2 sm:grid-flow-row sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3">
                                 {gardenImages.map((image, index) => (
                                     <button
                                         key={image.id}
                                         onClick={() => setLightboxIndex(index)}
-                                        className="group relative aspect-[4/3] overflow-hidden rounded-xl"
+                                        className="group relative aspect-[4/3] snap-start overflow-hidden rounded-xl"
                                     >
                                         <div className="absolute inset-0 animate-pulse bg-zinc-800" />
                                         <img
@@ -109,14 +109,14 @@ export default function Welcome({
                     </section>
                 )}
 
-                <section className="relative px-4 py-24">
+                <section className="relative px-4 py-14 sm:py-24">
                     <div className="mx-auto max-w-7xl">
-                        <div className="mb-12 text-center">
-                            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                        <div className="mb-8 text-center sm:mb-12">
+                            <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">
                                 <span className="text-amber-400">Contact</span>{' '}
                                 Us
                             </h2>
-                            <p className="mt-3 text-zinc-400">
+                            <p className="mt-2 text-sm text-zinc-400 sm:mt-3 sm:text-base">
                                 We'd love to hear from you
                             </p>
                         </div>
@@ -231,7 +231,7 @@ export default function Welcome({
                     </div>
                 </section>
 
-                <footer className="border-t border-zinc-800 px-4 py-8">
+                <footer className="border-t border-zinc-800 px-4 py-8 pb-24 sm:pb-8">
                     <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
                         <p className="text-sm text-zinc-500">
                             &copy; {new Date().getFullYear()} Taman Ana. All

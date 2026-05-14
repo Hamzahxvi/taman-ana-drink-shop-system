@@ -99,16 +99,20 @@ export function DrinkCustomizationDialog({
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4">
             <div
                 className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                 onClick={onClose}
             />
-            <div className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-6 shadow-2xl">
-                <div className="mb-6 flex items-center gap-4">
-                    <span className="text-4xl">{product.icon}</span>
+            <div className="relative max-h-[88svh] w-full max-w-md overflow-y-auto rounded-t-3xl border border-zinc-800 bg-zinc-950 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-2xl sm:max-h-[90vh] sm:rounded-2xl sm:p-6">
+                <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-zinc-700 sm:hidden" />
+
+                <div className="mb-5 flex items-center gap-4 sm:mb-6">
+                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-zinc-900 text-3xl sm:text-4xl">
+                        {product.icon}
+                    </span>
                     <div>
-                        <h3 className="text-xl font-bold text-zinc-100">
+                        <h3 className="text-lg leading-tight font-bold text-zinc-100 sm:text-xl">
                             {product.name}
                         </h3>
                         <p className="text-sm text-zinc-400">
@@ -117,7 +121,7 @@ export function DrinkCustomizationDialog({
                     </div>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-5 sm:space-y-6">
                     <div>
                         <Label className="mb-3 block text-sm font-medium text-zinc-300">
                             Temperature
@@ -126,7 +130,7 @@ export function DrinkCustomizationDialog({
                             <button
                                 type="button"
                                 onClick={() => setTemperature('hot')}
-                                className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
+                                className={`flex min-h-12 items-center justify-center gap-2 rounded-xl border px-4 text-sm font-medium transition-all ${
                                     temperature === 'hot'
                                         ? 'border-orange-500 bg-orange-500/10 text-orange-400'
                                         : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
@@ -138,7 +142,7 @@ export function DrinkCustomizationDialog({
                             <button
                                 type="button"
                                 onClick={() => setTemperature('cold')}
-                                className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
+                                className={`flex min-h-12 items-center justify-center gap-2 rounded-xl border px-4 text-sm font-medium transition-all ${
                                     temperature === 'cold'
                                         ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400'
                                         : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
@@ -166,7 +170,7 @@ export function DrinkCustomizationDialog({
                                     key={value}
                                     type="button"
                                     onClick={() => setSweetness(value)}
-                                    className={`rounded-xl border px-3 py-2.5 text-sm font-medium transition-all ${
+                                    className={`min-h-11 rounded-xl border px-3 text-sm font-medium transition-all ${
                                         sweetness === value
                                             ? 'border-amber-500 bg-amber-500/10 text-amber-400'
                                             : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
@@ -235,7 +239,7 @@ export function DrinkCustomizationDialog({
                     </div>
                 </div>
 
-                <div className="mt-6 flex gap-3">
+                <div className="sticky bottom-0 mt-6 grid grid-cols-[0.8fr_1.2fr] gap-3 bg-zinc-950 pt-3">
                     <Button
                         onClick={onClose}
                         variant="outline"
@@ -245,9 +249,9 @@ export function DrinkCustomizationDialog({
                     </Button>
                     <Button
                         onClick={handleAdd}
-                        className="flex-1 bg-amber-500 font-semibold text-black hover:bg-amber-400"
+                        className="min-h-12 bg-amber-500 font-semibold text-black hover:bg-amber-400"
                     >
-                        Add to Cart — RM {unitPrice.toFixed(2)}
+                        Add - RM {unitPrice.toFixed(2)}
                     </Button>
                 </div>
             </div>
