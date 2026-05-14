@@ -44,6 +44,8 @@ services:
         value: stack
       - key: MAIL_MAILER
         value: log
+      - key: APP_URL
+        value: https://taman-ana.onrender.com
 
 databases:
   - name: taman-ana-db

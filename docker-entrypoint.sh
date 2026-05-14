@@ -6,7 +6,9 @@ if [ ! -f .env ]; then
 fi
 
 if [ -n "$RENDER_EXTERNAL_URL" ]; then
-    sed -i "s|APP_URL=.*|APP_URL=$RENDER_EXTERNAL_URL|" .env
+    sed -i "s|^APP_URL=.*|APP_URL=$RENDER_EXTERNAL_URL|" .env
+elif [ -n "$APP_URL" ]; then
+    sed -i "s|^APP_URL=.*|APP_URL=$APP_URL|" .env
 fi
 
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "" ]; then
