@@ -13,16 +13,25 @@ class AdminOrderController extends Controller
 {
     public function index()
     {
-        $allOrders = Order::with('items')
+        $orders = Order::with('items')
+            ->whereIn('status', ['pending', 'in-progress'])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $inProgressOrders = $allOrders->whereIn('status', ['pending', 'in-progress'])->values();
-        $completedOrders = $allOrders->where('status', 'completed')->values();
-
         return Inertia::render('admin/orders/index', [
-            'inProgressOrders' => OrderResource::collection($inProgressOrders)->resolve(),
-            'completedOrders' => OrderResource::collection($completedOrders)->resolve(),
+            'orders' => OrderResource::collection($orders)->resolve(),
+        ]);
+    }
+
+    public function completed()
+    {
+        $orders = Order::with('items')
+            ->where('status', 'completed')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return Inertia::render('admin/orders/completed', [
+            'orders' => OrderResource::collection($orders)->resolve(),
         ]);
     }
 
