@@ -86,7 +86,7 @@ export default function AdminProductsIndex({
         <>
             <Head title="Menu Management" />
 
-            <div className="p-6">
+            <div className="px-4 py-5 sm:p-6">
                 <Link
                     href="/admin"
                     className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition hover:text-foreground/90"
@@ -95,20 +95,88 @@ export default function AdminProductsIndex({
                     Back
                 </Link>
 
-                <div className="mb-6 flex items-center justify-between">
+                <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h1 className="text-2xl font-bold text-foreground">
                         Menu Items
                     </h1>
                     <Link
                         href="/admin/products/create"
-                        className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400"
+                        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400 sm:w-auto"
                     >
                         <Plus className="h-4 w-4" />
                         Add Item
                     </Link>
                 </div>
 
-                <div className="mb-10 overflow-hidden rounded-xl border border-border">
+                <div className="mb-10 grid gap-3 md:hidden">
+                    {products.map((product) => (
+                        <div
+                            key={product.id}
+                            className="rounded-xl border border-border bg-card p-4"
+                        >
+                            <div className="flex items-start gap-3">
+                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-muted text-2xl">
+                                    {product.icon}
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div className="min-w-0">
+                                            <h2 className="truncate text-base font-semibold text-foreground">
+                                                {product.name}
+                                            </h2>
+                                            <p className="mt-0.5 text-sm text-muted-foreground">
+                                                {product.category}
+                                            </p>
+                                        </div>
+                                        <span
+                                            className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
+                                                product.is_available
+                                                    ? 'bg-green-500/10 text-green-400'
+                                                    : 'bg-red-500/10 text-red-400'
+                                            }`}
+                                        >
+                                            {product.is_available
+                                                ? 'Available'
+                                                : 'Hidden'}
+                                        </span>
+                                    </div>
+
+                                    <div className="mt-3 flex items-center justify-between gap-3">
+                                        <span className="text-base font-semibold text-amber-400">
+                                            RM {product.price.toFixed(2)}
+                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <Link
+                                                href={`/admin/products/${product.id}/edit`}
+                                                aria-label={`Edit ${product.name}`}
+                                                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted-foreground hover:bg-muted hover:text-foreground"
+                                            >
+                                                <Pencil className="h-4 w-4" />
+                                            </Link>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleDeleteProduct(product)
+                                                }
+                                                aria-label={`Delete ${product.name}`}
+                                                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted-foreground hover:bg-red-500/10 hover:text-red-400"
+                                            >
+                                                <Trash2 className="h-4 w-4" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    {products.length === 0 && (
+                        <div className="rounded-xl border border-border bg-card px-4 py-8 text-center text-sm text-muted-foreground">
+                            No menu items yet.
+                        </div>
+                    )}
+                </div>
+
+                <div className="mb-10 hidden overflow-hidden rounded-xl border border-border md:block">
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-border bg-card">
@@ -197,7 +265,7 @@ export default function AdminProductsIndex({
                     </table>
                 </div>
 
-                <div className="mb-4 flex items-center justify-between">
+                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h2 className="text-xl font-bold text-foreground">
                         Extras
                     </h2>
@@ -206,7 +274,7 @@ export default function AdminProductsIndex({
                             resetExtraForm();
                             setShowExtraForm(!showExtraForm);
                         }}
-                        className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400"
+                        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400 sm:w-auto"
                     >
                         <Plus className="h-4 w-4" />
                         Add Extra
@@ -257,14 +325,14 @@ export default function AdminProductsIndex({
                             <div className="flex items-end gap-2">
                                 <button
                                     type="submit"
-                                    className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400"
+                                    className="min-h-10 flex-1 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400 sm:flex-none"
                                 >
                                     {editingExtra ? 'Update' : 'Save'}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={resetExtraForm}
-                                    className="rounded-lg border border-border px-4 py-2 text-sm text-muted-foreground hover:bg-muted"
+                                    className="min-h-10 flex-1 rounded-lg border border-border px-4 py-2 text-sm text-muted-foreground hover:bg-muted sm:flex-none"
                                 >
                                     Cancel
                                 </button>
@@ -273,7 +341,62 @@ export default function AdminProductsIndex({
                     </form>
                 )}
 
-                <div className="rounded-xl border border-border bg-card">
+                <div className="grid gap-3 md:hidden">
+                    {extras.map((extra) => (
+                        <div
+                            key={extra.id}
+                            className="rounded-xl border border-border bg-card p-4"
+                        >
+                            <div className="flex items-start justify-between gap-3">
+                                <div className="min-w-0">
+                                    <h3 className="truncate text-base font-semibold text-foreground">
+                                        {extra.name}
+                                    </h3>
+                                    <p className="mt-1 text-sm text-amber-400">
+                                        RM {extra.price.toFixed(2)}
+                                    </p>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => handleToggleExtra(extra)}
+                                    className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition ${
+                                        extra.is_active
+                                            ? 'bg-green-500/10 text-green-400'
+                                            : 'bg-muted text-muted-foreground'
+                                    }`}
+                                >
+                                    {extra.is_active ? 'Active' : 'Inactive'}
+                                </button>
+                            </div>
+
+                            <div className="mt-4 grid grid-cols-2 gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => handleEditExtra(extra)}
+                                    className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-border text-sm text-muted-foreground hover:bg-muted hover:text-foreground/90"
+                                >
+                                    <Pencil className="h-4 w-4" />
+                                    Edit
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => handleDeleteExtra(extra)}
+                                    className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-border text-sm text-muted-foreground hover:bg-red-500/10 hover:text-red-400"
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                    {extras.length === 0 && (
+                        <div className="rounded-xl border border-border bg-card px-4 py-8 text-center text-sm text-muted-foreground">
+                            No extras added yet
+                        </div>
+                    )}
+                </div>
+
+                <div className="hidden rounded-xl border border-border bg-card md:block">
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-border text-left text-sm text-muted-foreground">
