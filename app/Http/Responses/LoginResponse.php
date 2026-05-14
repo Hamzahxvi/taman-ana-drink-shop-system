@@ -12,7 +12,7 @@ class LoginResponse implements LoginResponseContract
     {
         $user = $request->user();
 
-        if ($user->role === 'admin') {
+        if ($user->canAccessManagement()) {
             return $request->wantsJson()
                 ? new JsonResponse('', 204)
                 : redirect()->intended(route('admin.dashboard'));

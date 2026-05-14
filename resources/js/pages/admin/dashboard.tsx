@@ -1,10 +1,12 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import {
     ClipboardList,
     Coffee,
+    Image,
     LogOut,
     ShoppingBag,
     TrendingUp,
+    Users,
 } from 'lucide-react';
 
 export default function AdminDashboard({
@@ -19,6 +21,8 @@ export default function AdminDashboard({
     };
     popularItems: Record<string, number>;
 }) {
+    const { auth } = usePage().props;
+    const isAdmin = auth.user?.role === 'admin';
     const cards = [
         {
             label: 'Orders Today',
@@ -148,7 +152,7 @@ export default function AdminDashboard({
                                     Manage incoming orders
                                 </p>
                             </div>
-                            <span className="text-2xl">📋</span>
+                            <ClipboardList className="h-6 w-6 text-amber-400" />
                         </Link>
 
                         <Link
@@ -163,23 +167,42 @@ export default function AdminDashboard({
                                     Add, edit, or remove drink items
                                 </p>
                             </div>
-                            <span className="text-2xl">☕</span>
+                            <Coffee className="h-6 w-6 text-amber-400" />
                         </Link>
 
-                        <Link
-                            href="/admin/garden"
-                            className="flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-all hover:border-amber-500/50"
-                        >
-                            <div>
-                                <h3 className="font-semibold text-foreground">
-                                    Garden Gallery
-                                </h3>
-                                <p className="text-sm text-muted-foreground">
-                                    Manage garden photos
-                                </p>
-                            </div>
-                            <span className="text-2xl">🌿</span>
-                        </Link>
+                        {isAdmin && (
+                            <>
+                                <Link
+                                    href="/admin/users"
+                                    className="flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-all hover:border-amber-500/50"
+                                >
+                                    <div>
+                                        <h3 className="font-semibold text-foreground">
+                                            Manage Accounts
+                                        </h3>
+                                        <p className="text-sm text-muted-foreground">
+                                            Update customer and staff access
+                                        </p>
+                                    </div>
+                                    <Users className="h-6 w-6 text-amber-400" />
+                                </Link>
+
+                                <Link
+                                    href="/admin/garden"
+                                    className="flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-all hover:border-amber-500/50"
+                                >
+                                    <div>
+                                        <h3 className="font-semibold text-foreground">
+                                            Garden Gallery
+                                        </h3>
+                                        <p className="text-sm text-muted-foreground">
+                                            Manage garden photos
+                                        </p>
+                                    </div>
+                                    <Image className="h-6 w-6 text-amber-400" />
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

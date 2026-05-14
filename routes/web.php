@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExtraController;
 use App\Http\Controllers\Admin\GardenImageController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [WelcomeController::class, 'dashboard'])->name('dashboard');
 });
 
-Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified', 'admin.or.staff'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
@@ -66,14 +67,20 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::get('/orders/completed', [AdminOrderController::class, 'completed'])->name('orders.completed');
     Route::patch('/orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.status');
 
+    Route::post('/extras', [ExtraController::class, 'store'])->name('extras.store');
+    Route::put('/extras/{extra}', [ExtraController::class, 'update'])->name('extras.update');
+    Route::delete('/extras/{extra}', [ExtraController::class, 'destroy'])->name('extras.destroy');
+});
+
+Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::put('/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+
     Route::get('/garden', [GardenImageController::class, 'index'])->name('garden.index');
     Route::post('/garden', [GardenImageController::class, 'store'])->name('garden.store');
     Route::post('/garden/{gardenImage}', [GardenImageController::class, 'update'])->name('garden.update');
     Route::delete('/garden/{gardenImage}', [GardenImageController::class, 'destroy'])->name('garden.destroy');
-
-    Route::post('/extras', [ExtraController::class, 'store'])->name('extras.store');
-    Route::put('/extras/{extra}', [ExtraController::class, 'update'])->name('extras.update');
-    Route::delete('/extras/{extra}', [ExtraController::class, 'destroy'])->name('extras.destroy');
 });
 
 require __DIR__.'/settings.php';

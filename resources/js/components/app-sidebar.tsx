@@ -5,6 +5,7 @@ import {
     Image,
     LayoutGrid,
     ShoppingBag,
+    Users,
 } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -19,6 +20,8 @@ import type { NavItem } from '@/types';
 export function AppSidebar() {
     const { auth } = usePage().props;
     const isAdmin = auth.user?.role === 'admin';
+    const canAccessManagement =
+        auth.user?.role === 'admin' || auth.user?.role === 'staff';
 
     const mainNavItems: NavItem[] = [
         {
@@ -49,18 +52,27 @@ export function AppSidebar() {
             href: '/admin/orders',
             icon: ShoppingBag,
         },
-        {
-            title: 'Garden',
-            href: '/admin/garden',
-            icon: Image,
-        },
+        ...(isAdmin
+            ? [
+                  {
+                      title: 'Accounts',
+                      href: '/admin/users',
+                      icon: Users,
+                  },
+                  {
+                      title: 'Garden',
+                      href: '/admin/garden',
+                      icon: Image,
+                  },
+              ]
+            : []),
     ];
 
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarContent>
                 <NavMain items={mainNavItems} />
-                {isAdmin && (
+                {canAccessManagement && (
                     <NavMain items={adminNavItems} label="Management" />
                 )}
             </SidebarContent>

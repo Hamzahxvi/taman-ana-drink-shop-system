@@ -29,6 +29,15 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
+        User::updateOrCreate(
+            ['email' => 'staff@tamanana.com'],
+            [
+                'name' => 'Taman Ana Staff',
+                'password' => Hash::make('password'),
+                'role' => 'staff',
+            ],
+        );
+
         foreach ($this->extras() as $extra) {
             Extra::updateOrCreate(
                 ['slug' => $extra['slug']],
