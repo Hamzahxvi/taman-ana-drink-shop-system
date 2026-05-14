@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-ARG CACHEBUST=3
+ARG CACHEBUST=4
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
@@ -24,12 +24,12 @@ COPY . /var/www/html
 
 WORKDIR /var/www/html
 
+RUN ls public/build/assets/app-*.js && ls public/build/assets/app-*.css && ls public/build/assets/welcome-*.js
+
 RUN cp .env.example .env \
     && touch database/database.sqlite \
     && composer install --no-interaction --optimize-autoloader --no-dev \
     && php artisan key:generate --force \
-    && npm ci \
-    && npm run build \
     && chown -R www-data:www-data /var/www/html/storage \
     && chown -R www-data:www-data /var/www/html/bootstrap/cache
 
