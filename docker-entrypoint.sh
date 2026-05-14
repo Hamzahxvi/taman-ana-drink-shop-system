@@ -15,6 +15,8 @@ if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "" ]; then
     php artisan key:generate --force
 fi
 
+touch database/database.sqlite
+
 php artisan migrate --force
 
 php artisan tinker --execute="
@@ -28,6 +30,10 @@ if (\App\Models\Extra::count() === 0) {
 "
 
 php artisan db:seed --force --class=DatabaseSeeder
+
+npm ci
+npm run build
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 php artisan config:cache
 php artisan route:cache
