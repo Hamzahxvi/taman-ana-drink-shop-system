@@ -1,32 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
-import { CheckCircle, Clock, CookingPot, FileText, MapPin } from 'lucide-react';
+import { CheckCircle, FileText, MapPin } from 'lucide-react';
 import { dashboard } from '@/routes';
 import type { Order } from '@/types';
-
-const statusConfig: Record<
-    string,
-    {
-        label: string;
-        color: string;
-        icon: React.ComponentType<{ className?: string }>;
-    }
-> = {
-    pending: {
-        label: 'Pending',
-        color: 'bg-amber-500/10 text-amber-400',
-        icon: Clock,
-    },
-    'in-progress': {
-        label: 'In Progress',
-        color: 'bg-blue-500/10 text-blue-400',
-        icon: CookingPot,
-    },
-    completed: {
-        label: 'Completed',
-        color: 'bg-green-500/10 text-green-400',
-        icon: CheckCircle,
-    },
-};
 
 const sweetnessLabels: Record<string, string> = {
     regular: 'Regular',
@@ -65,12 +40,6 @@ export default function OrdersCompleted({ orders }: { orders: Order[] }) {
                 ) : (
                     <div className="space-y-4">
                         {orders.map((order) => {
-                            const StatusIcon =
-                                statusConfig[order.status]?.icon ?? Clock;
-                            const statusStyle =
-                                statusConfig[order.status]?.color ??
-                                'bg-zinc-500/10 text-zinc-400';
-
                             return (
                                 <div
                                     key={order.id}

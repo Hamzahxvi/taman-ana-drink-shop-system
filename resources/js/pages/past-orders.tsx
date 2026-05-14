@@ -36,7 +36,7 @@ export default function PastOrders() {
 
         let cancelled = false;
 
-        const fetchOrders = (phoneNumber: string) => {
+        const fetchOrders = () => {
         fetch(`/orders/lookup?phone=${encodeURIComponent(phone)}`, {
             headers: { Accept: 'application/json' },
         })

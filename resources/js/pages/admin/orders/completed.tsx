@@ -1,24 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
-import { ArrowLeft, CheckCircle, Clock, CookingPot, MapPin, Truck } from 'lucide-react';
+import { ArrowLeft, CheckCircle, MapPin, Truck } from 'lucide-react';
 import type { Order } from '@/types';
-
-const statusConfig = {
-    pending: {
-        label: 'Pending',
-        color: 'bg-amber-500/10 text-amber-400',
-        icon: Clock,
-    },
-    'in-progress': {
-        label: 'In Progress',
-        color: 'bg-blue-500/10 text-blue-400',
-        icon: CookingPot,
-    },
-    completed: {
-        label: 'Completed',
-        color: 'bg-green-500/10 text-green-400',
-        icon: CheckCircle,
-    },
-};
 
 const sweetnessLabels: Record<string, string> = {
     regular: 'Regular',
